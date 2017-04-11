@@ -12,8 +12,6 @@ server = http.createServer(app);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;        // set our port
-
 // DEBUT VARIABLE DU JEU
 var playerTab = [];
 var plateauJeu = [];
