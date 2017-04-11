@@ -1,13 +1,8 @@
-// server.js
-
-// BASE SETUP
-// =============================================================================
-
 // call the packages we need
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
-var firebase = require("firebase");
+var hat = require('hat');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -15,17 +10,42 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;        // set our port
+var playerTab = [];
 
-// ROUTES FOR OUR API
-// =============================================================================
-var router = express.Router();              // get an instance of the express Router
+// DEBUT FONCTION UTILES POUR LE CODE
+function getPlayerWithGroupName(name) {
+	for (var i = 0; i < playerTab.length; i++) {
+		if (playerTab[i].groupName == name)
+			return playerTab[i];
+	}
+	return;
+}
+
+function getPlayerWithToken(token) {
+	for (var i = 0; i < playerTab.length; i++) {
+		if (playerTab[i].idJoueur == token)
+			return playerTab[i];
+	}
+	return;
+}
+// FIN FONCTION UTILES POUR LE CODE
+
+// DEBUT ROUTE API
+var router = express.Router();
 
 router.get('/connect/:groupName', function(req, res) {
-	res.json({
-		idJoueur: 'idJoueur',
-		code: 'codeHTTP',
-		nomJoueur: 'nomJoueur'
-	});
+	if (playerTab.length >= 2) {
+		res.status(401).send({error: "La partie a deja commencee"});
+	}
+	else {
+		playerTab.push({groupName: req.params.groupName, idJoueur: hat()});
+		res.status(200).send({
+			idJoueur: getPlayerWithGroupName(req.params.groupName).idJoueur,
+			code: 200,
+			nomJoueur: req.params.groupName,
+			playerTab: playerTab
+		});
+	}
 });
 
 router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
@@ -50,11 +70,9 @@ router.get('/turn/:idJoueur', function(req, res) {
 	});
 });
 
-// REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
 app.use('/', router);
+// FIN ROUTE API
 
 // START THE SERVER
-// =============================================================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
