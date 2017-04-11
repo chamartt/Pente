@@ -20,30 +20,39 @@ var port = process.env.PORT || 8080;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
-// Initialize Firebase
-var config = {
-	apiKey: "AIzaSyBDI1o88-k9xQwblVVc58zzy8MS5G9lw7w",
-	authDomain: "newguyspente.firebaseapp.com",
-	databaseURL: "https://newguyspente.firebaseio.com",
-	projectId: "newguyspente",
-	storageBucket: "newguyspente.appspot.com",
-	messagingSenderId: "1019589897751"
-};
-firebase.initializeApp(config);
-
-var firebaseAuth = firebase.auth();
-var firebaseDatabase = firebase.database();
-
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+router.get('/connect/:groupName', function(req, res) {
+	res.json({
+		idJoueur: 'idJoueur',
+		code: 'codeHTTP',
+		nomJoueur: 'nomJoueur'
+	});
 });
 
-// more routes for our API will happen here
+router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
+	res.json({
+		code: 'codeHTTP'
+	}); 
+});
+
+router.get('/turn/:idJoueur', function(req, res) {
+	res.json({
+		status: 'turnStatus(0/1)', 
+		tableau: 'tableau',
+		nbTenaillesJ1: 'nbTenaillesJ1',
+		nbTenaillesJ2: 'nbTenaillesJ2',
+		dernierCoupX: 'dernierCoupX',
+		dernierCoupY: 'dernierCoupY',
+		prolongation: 'prolongation',
+		finPartie: 'finPartie',
+		detailFinPartie: 'detailFinPartie',
+		numTour: 'numTour',
+		code: 'codeHTTP'
+	});
+});
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use('/api', router);
+app.use('/', router);
 
 // START THE SERVER
 // =============================================================================
