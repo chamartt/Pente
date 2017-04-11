@@ -381,7 +381,7 @@ var router = express.Router();
 
 router.get('/connect/:groupName', function(req, res) {
 	if (playerTab.length >= 2) {
-		res.status(401).send({error: "La partie a deja commencee"});
+		res.status(401).send({error: "La partie est en cours"});
 	}
 	else {
 		playerTab.push({groupName: req.params.groupName, idJoueur: hat(), number: numJoueur});
