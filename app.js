@@ -3,9 +3,12 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var hat = require('hat');
-
+var http = require('http');
+var server = {};
 // configure app to use bodyParser()
 // this will let us get the data from a POST
+server = http.createServer(app);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -480,5 +483,10 @@ app.use('/', router);
 // FIN ROUTE API
 
 // START THE SERVER
-app.listen(port);
-console.log('Magic happens on port ' + port);
+// Run app on port 3000
+server.listen('8080', function(){
+    var host = server.address().address,
+        port = server.address().port;
+
+    console.log('Listening at http://%s:%s', host, port);
+});
