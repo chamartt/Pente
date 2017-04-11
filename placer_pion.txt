@@ -42,11 +42,11 @@ private void placer_pion{
 		else if(isLigneDeTroisAdversaire())
 			placer_pion_sur_extremite(ligneDeTroisIsoleeAdversaire);
 		else if(isLigneDeDeuxPersonnel()){
-			if(isLigneDeDeuxAdversaire())
-				placer_pion_sur_extremite(ligneDeDeuxAdversaire);
-			else
+			placer_pion_sur_extremite(ligneDeDeuxPersonnel);
+		}else if(tempsPartie>9.99){
+			if(isLigneDeDeuxPersonnel())
 				placer_pion_sur_extremite(ligneDeDeuxPersonnel);
-		}else{
+		else{
 			if(isPaireMangeableAdversaire())
 				placer_pion_sur_extremite(paireMangeableAdversaire);
 			else if(isPaireFormable())
