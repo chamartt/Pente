@@ -1,0 +1,102 @@
+/*** PAGE GENERALE ***/
+    html, body {
+        margin: 0;
+        padding: 0;
+        min-width: 800px;
+    }
+    .container-left {
+        display: inline-block;
+        width: 50%;
+        float: left;
+    }
+    .container-right {
+        display: inline-block;
+        width: 50%;
+        float: left;
+    }
+
+/*** PLATEAU ***/
+    #game > div.container-right{
+        width: 45%;
+    }
+    #game-title {
+        font-family: 'Spirax', cursive;
+        font-size: 30pt;
+        padding-left: 20px;
+    }
+    #turn-time {
+        width: 100%;
+        padding: 20px 0px 0px 385px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16pt;
+    }
+    #turn-time #time-label {
+        font-size: 14pt;
+    }
+    #turn-time #time {
+        font-weight: bold;
+        font-size: 14pt;
+    }
+    #board {
+        padding: 20px;
+        width: 800px;
+        height: 600px;
+        font-family: 'Spirax', cursive;
+        font-size: 16pt;
+    }
+        .row {
+        width: 100%;
+        line-height: 30px;
+    }
+    .cell {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background: url("../ressources/cross.png") no-repeat center;
+        vertical-align: top;
+    }
+    .cell-header {
+        display: inline-block;
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        vertical-align: top;
+        background: lightgrey;
+        border-radius: 30px;
+    }
+    .hidden-cell {
+        visibility: hidden;
+    }
+
+/*** DETAILS DE LA PARTIE ***/
+    #details-title {
+        font-family: 'Roboto', sans-serif;
+        font-size: 30pt;
+        padding-bottom: 75px;
+    }
+    #details {
+        font-family: 'Roboto', sans-serif;
+    }
+    .details-section {
+        font-weight: bold;
+        font-size: 16pt;
+    }
+    fieldset {
+        border: solid grey 1px;
+        margin-bottom: 10px;
+    }
+    legend {
+        border: solid grey 1px;
+        border-radius: 5px;
+    }
+    .details-line {
+
+    }
+    .labels {
+        display: inline-block;
+        color: grey;
+    }
+    .values {
+        display: inline-block;
+        font-weight: bold;
+    }
