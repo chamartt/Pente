@@ -15,7 +15,7 @@ var port = process.env.PORT || 8080;        // set our port
 var playerTab = [];
 var plateauJeu = [];
 var nombreDeTour = 0;
-var nbTenailleJ1 = 0;
+var nbTenaillesJ1 = 0;
 var nbTenaillesJ2 = 0;
 var numJoueur = 1;
 var dernierCoupX;
@@ -23,6 +23,8 @@ var dernierCoupY;
 var tourJoueur;
 var finDePartie = false;
 var mortSubite = false;
+var timeout = null;
+var messageFinPartie = null;
 // FIN VARIABLE DU JEU
 
 // DEBUT FONCTION UTILES POUR LE CODE
@@ -60,6 +62,289 @@ function generateJeu() {
 		plateauJeu.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 	}
 }
+
+function gestionTenaillesHaut(numeroJoueur, x, y) {
+	if (numeroJoueur == 1) {
+		if (x - 3 >= 0) {
+			if (plateauJeu[x - 1][y] == 2 && plateauJeu[x - 2][y] == 2 && plateauJeu[x - 3][y] == 1) {
+				// tenaille haut du pion posé
+				nbTenaillesJ1++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x - 1][y] = 0;
+				plateauJeu[x - 2][y] = 0;
+			}
+		}
+		if (x - 3 >= 0 && y + 3 <= 18) {
+			if (plateauJeu[x - 1][y + 1] == 2 && plateauJeu[x - 2][y + 2] == 2 && plateauJeu[x - 3][y + 3] == 1) {
+				// tenaille haut diagonale droite du pion posé
+				nbTenaillesJ1++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x - 1][y + 1] = 0;
+				plateauJeu[x - 2][y + 2] = 0;
+			}
+		}
+		if (x - 3 >= 0 && y - 3 >= 0) {
+			if (plateauJeu[x - 1][y - 1] == 2 && plateauJeu[x - 2][y - 2] == 2 && plateauJeu[x - 3][y - 3] == 1) {
+				// tenaille haut diagonale gauche du pion posé
+				nbTenaillesJ1++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x - 1][y - 1] = 0;
+				plateauJeu[x - 2][y - 2] = 0;
+			}
+		}
+	}
+	else {
+		if (x - 3 >= 0) {
+			if (plateauJeu[x - 1][y] == 1 && plateauJeu[x - 2][y] == 1 && plateauJeu[x - 3][y] == 2) {
+				// tenaille haut du pion posé
+				nbTenaillesJ2++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x - 1][y] = 0;
+				plateauJeu[x - 2][y] = 0;
+			}
+		}
+		if (x - 3 >= 0 && y + 3 <= 18) {
+			if (plateauJeu[x - 1][y + 1] == 1 && plateauJeu[x - 2][y + 2] == 1 && plateauJeu[x - 3][y + 3] == 2) {
+				// tenaille haut diagonale droite du pion posé
+				nbTenaillesJ2++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x - 1][y + 1] = 0;
+				plateauJeu[x - 2][y + 2] = 0;
+			}
+		}
+		if (x - 3 >= 0 && y - 3 >= 0) {
+			if (plateauJeu[x - 1][y - 1] == 1 && plateauJeu[x - 2][y - 2] == 1 && plateauJeu[x - 3][y - 3] == 2) {
+				// tenaille haut diagonale gauche du pion posé
+				nbTenaillesJ2++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x - 1][y - 1] = 0;
+				plateauJeu[x - 2][y - 2] = 0;
+			}
+		}
+	}
+}
+function gestionTenaillesBas(numeroJoueur, x, y) {
+	if (numeroJoueur == 1) {
+		if (x + 3 <= 18) {
+			if (plateauJeu[x + 1][y] == 2 && plateauJeu[x + 2][y] == 2 && plateauJeu[x + 3][y] == 1) {
+				// tenaille bas du pion posé
+				nbTenaillesJ1++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x + 1][y] = 0;
+				plateauJeu[x + 2][y] = 0;
+			}
+		}
+		if (x + 3 <= 18 && y + 3 <= 18) {
+			if (plateauJeu[x + 1][y + 1] == 2 && plateauJeu[x + 2][y + 2] == 2 && plateauJeu[x + 3][y + 3] == 1) {
+				// tenaille bas diagonale droite du pion posé
+				nbTenaillesJ1++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x + 1][y + 1] = 0;
+				plateauJeu[x + 2][y + 2] = 0;
+			}
+		}
+		if (x + 3 <= 18 && y - 3 >= 0) {
+			if (plateauJeu[x + 1][y - 1] == 2 && plateauJeu[x + 2][y - 2] == 2 && plateauJeu[x + 3][y - 3] == 1) {
+				// tenaille bas diagonale gauche du pion posé
+				nbTenaillesJ1++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x + 1][y - 1] = 0;
+				plateauJeu[x + 2][y - 2] = 0;
+			}
+		}
+	}
+	else {
+		if (x + 3 <= 18) {
+			if (plateauJeu[x + 1][y] == 1 && plateauJeu[x + 2][y] == 1 && plateauJeu[x + 3][y] == 2) {
+				// tenaille bas du pion posé
+				nbTenaillesJ2++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x + 1][y] = 0;
+				plateauJeu[x + 2][y] = 0;
+			}
+		}
+		if (x + 3 <= 18 && y + 3 <= 18) {
+			if (plateauJeu[x + 1][y + 1] == 1 && plateauJeu[x + 2][y + 2] == 1 && plateauJeu[x + 3][y + 3] == 2) {
+				// tenaille bas diagonale droite du pion posé
+				nbTenaillesJ2++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x + 1][y + 1] = 0;
+				plateauJeu[x + 2][y + 2] = 0;
+			}
+		}
+		if (x + 3 <= 18 && y - 3 >= 0) {
+			if (plateauJeu[x + 1][y - 1] == 1 && plateauJeu[x + 2][y - 2] == 1 && plateauJeu[x + 3][y - 3] == 2) {
+				// tenaille bas diagonale gauche du pion posé
+				nbTenaillesJ2++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x + 1][y - 1] = 0;
+				plateauJeu[x + 2][y - 2] = 0;
+			}
+		}
+	}
+}
+function gestionTenaillesCote(numeroJoueur, x, y) {
+	if (numeroJoueur == 1) {
+		if (y - 3 >= 0) {
+			if (plateauJeu[x][y - 1] == 2 && plateauJeu[x][y - 2] == 2 && plateauJeu[x][y - 3] == 1) {
+				// tenaille à gauche du pion posé
+				nbTenaillesJ1++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x][y - 1] = 0;
+				plateauJeu[x][y - 2] = 0;
+			}
+		}
+		if (y + 3 <= 18) {
+			if (plateauJeu[x][y + 1] == 2 && plateauJeu[x][y + 2] == 2 && plateauJeu[x][y + 3] == 1) {
+				// tenaille à droite du pion posé
+				nbTenaillesJ1++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x][y + 1] = 0;
+				plateauJeu[x][y + 2] = 0;
+			}
+		}
+	}
+	else {
+		if (y - 3 >= 0) {
+			if (plateauJeu[x][y - 1] == 1 && plateauJeu[x][y - 2] == 1 && plateauJeu[x][y - 3] == 2) {
+				// tenaille à gauche du pion posé
+				nbTenaillesJ2++;
+				plateauJeu[x][y - 1] = 0;
+				plateauJeu[x][y - 2] = 0;
+			}
+		}
+		if (y + 3 <= 18) {
+			if (plateauJeu[x][y + 1] == 1 && plateauJeu[x][y + 2] == 1 && plateauJeu[x][y + 3] == 2) {
+				// tenaille à droite du pion posé
+				nbTenaillesJ2++;
+				if (mortSubite) {
+					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+				}
+				plateauJeu[x][y + 1] = 0;
+				plateauJeu[x][y + 2] = 0;
+			}
+		}
+	}
+}
+
+function gestionLigneVerticale(numeroJoueur, x, y) {
+	var countConsecutive = 0;
+	for (var i = x; i <= 18; i++) {
+		if (plateau[i][y] == numeroJoueur)
+			countConsecutive++;
+		else
+			break;
+	}
+	if (x - 1 >= 0) {
+		for (var i = x - 1; i >= 0; i--) {
+			if (plateau[i][y] == numeroJoueur)
+				countConsecutive++;
+			else
+				break;
+		}
+	}
+	if (countConsecutive >= 5) {
+		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une ligne";
+		finDePartie = true;
+	}
+}
+function gestionLigneHorizontale(numeroJoueur, x, y) {
+	var countConsecutive = 0;
+	for (var i = y; i <= 18; i++) {
+		if (plateau[x][i] == numeroJoueur)
+			countConsecutive++;
+		else
+			break;
+	}
+	if (y - 1 >= 0) {
+		for (var i = y - 1; y >= 0; i--) {
+			if (plateau[x][i] == numeroJoueur)
+				countConsecutive++;
+			else
+				break;
+		}
+	}
+	if (countConsecutive >= 5) {
+		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une ligne";
+		finDePartie = true;
+	}
+}
+
+function gestionLigneDiagonaleHautGaucheBasDroite(numeroJoueur, x, y) {
+	var countConsecutive = 0;
+	for (var i = x, var j = y; i <= 18 && j <= 18; i++, j++) {
+		if (plateau[i][j] == numeroJoueur)
+			countConsecutive++;
+		else
+			break;
+	}
+	if (y - 1 >= 0 && x - 1 >= 0) {
+		for (var i = x - 1, var j = y - 1; i >= 0 && j >= 0; i--, j--) {
+			if (plateau[i][j] == numeroJoueur)
+				countConsecutive++;
+			else
+				break;
+		}
+	}
+	if (countConsecutive >= 5) {
+		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une ligne";
+		finDePartie = true;
+	}
+}
+function gestionLigneDiagonaleHautDroiteBasGauche(numeroJoueur, x, y) {
+	var countConsecutive = 0;
+	for (var i = x, var j = y; i >= 0 && j <= 18; i--, j++) {
+		if (plateau[i][j] == numeroJoueur)
+			countConsecutive++;
+		else
+			break;
+	}
+	if (y - 1 >= 0 && x + 1 <= 18) {
+		for (var i = x + 1, var j = y - 1; i <= 18 && j >= 0; i++, j--) {
+			if (plateau[i][j] == numeroJoueur)
+				countConsecutive++;
+			else
+				break;
+		}
+	}
+	if (countConsecutive >= 5) {
+		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une ligne";
+		finDePartie = true;
+	}
+}
+
+function playerTooLong() {
+	messageFinPartie = "Le joueur" + tourJoueur.groupName + " a perdu, temps d'attente trop long";
+	finDePartie = true;
+}
 // FIN FONCTION UTILES POUR LE CODE
 
 // DEBUT ROUTE API
@@ -78,7 +363,7 @@ router.get('/connect/:groupName', function(req, res) {
 			tourJoueur = playerTab[randomStart];
 			setTimeout(function() {
 				mortSubite = true;
-			}, (1000*60*10);
+			}, (1000*60*10));
 		}
 		res.status(200).send({
 			idJoueur: getPlayerWithGroupName(req.params.groupName).idJoueur,
@@ -115,30 +400,48 @@ router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
 			nombreDeTour++;
 			dernierCoupX = req.params.posX;
 			dernierCoupY = req.params.posY;
-			tourJoueur = getOtherPlayer(req.params.idJoueur);
+			// Gestion des tenailles - mort subite - fin du jeu
+			gestionTenaillesHaut(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);
+			gestionTenaillesBas(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);
+			gestionTenaillesCote(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);		
+			gestionLigneVerticale(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);
+			gestionLigneHorizontale(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);
+			gestionLigneDiagonaleHautGaucheBasDroite(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);
+			gestionLigneDiagonaleHautDroiteBasGauche(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);
+			if (nbTenaillesJ1 == 5 || nbTenaillesJ2 == 5) {
+				messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne au nombre de tenailles";
+				finDePartie = true;
+			}
 			res.status(200).send({success: "Pion mis en place"});
-			// [TODO] Gestion des tenailles - mort subite - fin du jeu
-			// ......
+			tourJoueur = getOtherPlayer(req.params.idJoueur);
+			clearTimeout(timeout)
+			timeout = setTimeout(playerTooLong, 10000);
 		}
 	} 
 });
 
 router.get('/turn/:idJoueur', function(req, res) {
 	res.status(200).send({
-		status: tourJoueur.idJoueur == req.params.idJoueur ? 1 : 0, 
+		status: (tourJoueur.idJoueur !== null && tourJoueur.idJoueur == req.params.idJoueur) ? 1 : 0, 
 		tableau: plateauJeu,
-		nbTenaillesJ1: nbTenailleJ1,
+		nbTenaillesJ1: nbTenaillesJ1,
 		nbTenaillesJ2: nbTenaillesJ2,
 		dernierCoupX: dernierCoupX,
 		dernierCoupY: dernierCoupY,
 		prolongation: mortSubite,
 		finPartie: finDePartie,
-		detailFinPartie: 'detailFinPartie',
+		detailFinPartie: messageFinPartie,
 		numTour: nombreDeTour,
 		code: 200
 	});
 });
 
+/* CORS REQUEST */
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use('/', router);
 // FIN ROUTE API
 
