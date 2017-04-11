@@ -300,14 +300,15 @@ function gestionLigneHorizontale(numeroJoueur, x, y) {
 
 function gestionLigneDiagonaleHautGaucheBasDroite(numeroJoueur, x, y) {
 	var countConsecutive = 0;
-	for (var i = x, var j = y; i <= 18 && j <= 18; i++, j++) {
+	var i, j;
+	for (i = x, j = y; i <= 18 && j <= 18; i++, j++) {
 		if (plateau[i][j] == numeroJoueur)
 			countConsecutive++;
 		else
 			break;
 	}
 	if (y - 1 >= 0 && x - 1 >= 0) {
-		for (var i = x - 1, var j = y - 1; i >= 0 && j >= 0; i--, j--) {
+		for (i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--) {
 			if (plateau[i][j] == numeroJoueur)
 				countConsecutive++;
 			else
@@ -321,14 +322,15 @@ function gestionLigneDiagonaleHautGaucheBasDroite(numeroJoueur, x, y) {
 }
 function gestionLigneDiagonaleHautDroiteBasGauche(numeroJoueur, x, y) {
 	var countConsecutive = 0;
-	for (var i = x, var j = y; i >= 0 && j <= 18; i--, j++) {
+	var i, j;
+	for (i = x, j = y; i >= 0 && j <= 18; i--, j++) {
 		if (plateau[i][j] == numeroJoueur)
 			countConsecutive++;
 		else
 			break;
 	}
 	if (y - 1 >= 0 && x + 1 <= 18) {
-		for (var i = x + 1, var j = y - 1; i <= 18 && j >= 0; i++, j--) {
+		for (i = x + 1, j = y - 1; i <= 18 && j >= 0; i++, j--) {
 			if (plateau[i][j] == numeroJoueur)
 				countConsecutive++;
 			else
