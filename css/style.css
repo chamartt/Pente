@@ -22,7 +22,6 @@
         font-family: 'Roboto', sans-serif;
         margin-top: 50vh;
         transform: translateY(-50%);
-        display:none;
     }
     #connection-form {
 
@@ -73,6 +72,10 @@
       font-family: 'Roboto', sans-serif;
       cursor: pointer;
     }
+	.connect-error {
+		color: red;
+		text-align: center;
+	}
 
 /*** PLATEAU ***/
     #game {

@@ -7,24 +7,25 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
 </head>
-<body>
-<div id="connection">
+<body ng-app="penteApp" ng-controller="penteCtrl">
+<div id="connection" ng-show="!connected" ng-cloak>
     <fieldset>
         <legend>Connexion</legend>
         <div id="connection-form">
             <label>Identifiant</label>
-            <input type="text" />
+            <input type="text" ng-model="nomJoueur"/>
             <label>Domaine ou IP</label>
             <input type="text" value="kbellot.eu"/>
             <div id="btn-align">
-                <div class="btn">Machine</div>
+                <div class="btn" ng-click="joinGame()">Machine</div>
                 <div id="spacer"></div>
-                <div class="btn">Humain</div>
+                <div class="btn" ng-click="joinGame()">Humain</div>
             </div>
         </div>
+		<div class="connect-error" ng-if="errorMessage.error" ng-cloak > {{ errorMessage.message }}</div>
     </fieldset>
 </div>
-<div id="game">
+<div id="game" ng-show="connected" ng-cloak>
     <div class="container-left">
         <div id="game-title">
             <span>Le jeu de Pente</span>
@@ -117,23 +118,23 @@
                             <span class="labels">Nombre de coups joués</span>
                         </div>
                         <div class="container-right">
-                            <span class="values">34</span>
+                            <span class="values">{{ nbCoupJoue }}</span>
                         </div>
                     </div>
                 </div>
             </fieldset>
-            <fieldset class="fieldset-details">
+            <fieldset ng-if="numJoueur == 1" class="fieldset-details" ng-cloak >
                 <legend class="legend-details">Joueurs</legend>
                 <div class="player-section">
                     <span class="details-section">Joueur 1</span>
                     <div class="container-details-player">
                         <div class="details-line">
                             <div class="container-left"><span class="labels">Nom du joueur 1</span></div>
-                            <div class="container-right"><span class="values">Jean-Michel</span></div>
+                            <div class="container-right"><span class="values">{{ nomJoueur }}</span></div>
                         </div>
                         <div class="details-line">
                             <div class="container-left"><span class="labels">Nombre de tenailles</span></div>
-                            <div class="container-right"><span class="values">5</span></div>
+                            <div class="container-right"><span class="values">{{ nbTenaillesJ1 }}</span></div>
                         </div>
                     </div>
                 </div>
@@ -141,12 +142,33 @@
                     <span class="details-section">Joueur 2</span>
                     <div class="container-details-player">
                         <div class="details-line">
+                            <div class="container-left"><span class="labels">Nombre de tenailles</span></div>
+                            <div class="container-right"><span class="values">{{ nbTenaillesJ2 }}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+			<fieldset ng-if="numJoueur == 2" class="fieldset-details" ng-cloak >
+                <legend class="legend-details">Joueurs</legend>
+                <div class="player-section">
+                    <span class="details-section">Joueur 1</span>
+                    <div class="container-details-player">
+                        <div class="details-line">
+                            <div class="container-left"><span class="labels">Nombre de tenailles</span></div>
+                            <div class="container-right"><span class="values">{{ nbTenaillesJ1 }}</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="player-section">
+                    <span class="details-section">Joueur 2</span>
+                    <div class="container-details-player">
+						<div class="details-line">
                             <div class="container-left"><span class="labels">Nom du joueur 2</span></div>
-                            <div class="container-right"><span class="values">Jean-Gérard</span></div>
+                            <div class="container-right"><span class="values">{{ nomJoueur }}</span></div>
                         </div>
                         <div class="details-line">
                             <div class="container-left"><span class="labels">Nombre de tenailles</span></div>
-                            <div class="container-right"><span class="values">3</span></div>
+                            <div class="container-right"><span class="values">{{ nbTenaillesJ2 }}</span></div>
                         </div>
                     </div>
                 </div>
@@ -154,5 +176,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
