@@ -393,6 +393,21 @@ function gestionLigneDiagonaleHautDroiteBasGauche(numeroJoueur, x, y) {
 function playerTooLong() {
 	messageFinPartie = "Le joueur" + tourJoueur.groupName + " a perdu, temps d'attente trop long";
 	finDePartie = true;
+	setTimeout(function() {
+		playerTab = [];
+		plateauJeu = [];
+		nombreDeTour = 0;
+		nbTenaillesJ1 = 0;
+		nbTenaillesJ2 = 0;
+		numJoueur = 1;
+		dernierCoupX;
+		dernierCoupY;
+		tourJoueur;
+		finDePartie = false;
+		mortSubite = false;
+		timeout = null;
+		messageFinPartie = null;
+	}, 1000);
 }
 // FIN FONCTION UTILES POUR LE CODE
 
@@ -416,6 +431,21 @@ router.get('/connect/:groupName', function(req, res) {
 				else {
 					messageFinPartie = "Le joueur " + nbTenaillesJ1 > nbTenaillesJ2 ? getPlayerWithNumber(1).groupName : getPlayerWithNumber(2).groupName+ " gagne au nombre de tenaille";
 					finDePartie = true;
+					setTimeout(function() {
+						playerTab = [];
+						plateauJeu = [];
+						nombreDeTour = 0;
+						nbTenaillesJ1 = 0;
+						nbTenaillesJ2 = 0;
+						numJoueur = 1;
+						dernierCoupX;
+						dernierCoupY;
+						tourJoueur;
+						finDePartie = false;
+						mortSubite = false;
+						timeout = null;
+						messageFinPartie = null;
+					}, 1000);
 				}
 			}, (1000*60*10));
 		}
@@ -468,11 +498,28 @@ router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
 			gestionLigneHorizontale(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);
 			gestionLigneDiagonaleHautGaucheBasDroite(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);
 			gestionLigneDiagonaleHautDroiteBasGauche(getPlayerWithToken(req.params.idJoueur).number, req.params.posX, req.params.posY);
+			res.status(200).send({success: "Pion mis en place"});
 			if (nbTenaillesJ1 == 5 || nbTenaillesJ2 == 5) {
 				messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne au nombre de tenailles";
 				finDePartie = true;
 			}
-			res.status(200).send({success: "Pion mis en place"});
+			if (finDePartie) {
+				setTimeout(function() {
+					playerTab = [];
+					plateauJeu = [];
+					nombreDeTour = 0;
+					nbTenaillesJ1 = 0;
+					nbTenaillesJ2 = 0;
+					numJoueur = 1;
+					dernierCoupX;
+					dernierCoupY;
+					tourJoueur;
+					finDePartie = false;
+					mortSubite = false;
+					timeout = null;
+					messageFinPartie = null;
+				}, 1000);
+			}
 			tourJoueur = getOtherPlayer(req.params.idJoueur);
 			clearTimeout(timeout)
 			timeout = setTimeout(playerTooLong, 10000);
