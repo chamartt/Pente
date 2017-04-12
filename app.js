@@ -482,7 +482,7 @@ router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
 
 router.get('/turn/:idJoueur', function(req, res) {
 	res.status(200).send({
-		status: (tourJoueur.idJoueur !== null && tourJoueur.idJoueur == req.params.idJoueur) ? 1 : 0, 
+		status: (tourJoueur != undefined && tourJoueur !== null && tourJoueur.idJoueur !== null && tourJoueur.idJoueur == req.params.idJoueur) ? 1 : 0, 
 		tableau: plateauJeu,
 		nbTenaillesJ1: nbTenaillesJ1,
 		nbTenaillesJ2: nbTenaillesJ2,
@@ -507,7 +507,7 @@ app.use('/', router);
 
 // START THE SERVER
 // Run app on port 3000
-server.listen('80', function(){
+server.listen('8080', function(){
     var host = server.address().address,
         port = server.address().port;
 
