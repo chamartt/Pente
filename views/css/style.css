@@ -129,6 +129,21 @@
     .hidden-cell {
         visibility: hidden;
     }
+    .shadow-cell {
+        background: url("../ressources/cross-middle-turn3.png") no-repeat center;
+    }
+    .middle-cell {
+        background: url("../ressources/cross-middle-turn1.png") no-repeat center;
+    }
+    #turn-other {
+        display: default;
+    }
+    #turn-1 {
+        display: none;
+    }
+    #turn-3 {
+        display: none;
+    }
 /*** DETAILS DE LA PARTIE ***/
     #details-title {
         font-family: 'Roboto', sans-serif;
