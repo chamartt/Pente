@@ -404,10 +404,10 @@ router.get('/connect/:groupName', function(req, res) {
 		res.status(401).send({error: "La partie est en cours"});
 	}
 	else {
+		generateJeu();
 		playerTab.push({groupName: req.params.groupName, idJoueur: hat(), number: numJoueur});
 		numJoueur++;
 		if (playerTab.length == 2) {
-			generateJeu();
 			var randomStart = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
 			tourJoueur = playerTab[randomStart];
 			setTimeout(function() {
