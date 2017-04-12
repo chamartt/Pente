@@ -31,13 +31,15 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', function($scope, $h
 	
 	$scope.myTurnToPlay = function(data) {
 		console.log("myturn " + data);
+		// Decomenter cette ligne apres avoir joué le coup
+		// $scope.isPlaying = false;
 	};
 	
 	$scope.getTurnInfo = function(){
         $http.get("http://localhost:8080/turn/" + $scope.idJoueur)
         .then(function success(response) {
 			console.log("turnInfo " + response.data.status);
-            if(response.data.status == 1) {
+            if(response.data.status == 1 && !isPlaying) {
 				$scope.isPlaying = true;
 				$scope.myTurnToPlay(response.data);
 			}   
