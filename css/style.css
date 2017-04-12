@@ -197,3 +197,6 @@
     .values {
         display: inline-block;
     }
+	.endgame {
+		color: red !important;
+	}
