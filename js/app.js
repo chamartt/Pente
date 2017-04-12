@@ -12,6 +12,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', function($scope, $h
 	$scope.isPlaying = false;
 	$scope.interval;
 	$scope.errorMessage = {error : false, message: null};
+	$scope.plateauJeu;
 	
 	$scope.joinGame = function() {
 		$http.get("http://localhost:8080/connect/" + $scope.nomJoueur)
@@ -30,16 +31,31 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', function($scope, $h
 	};
 	
 	$scope.myTurnToPlay = function(data) {
-		console.log("myturn " + data);
+		var tableau = data.tableau;
+		var dernierCoupX = data.dernierCoupX;
+		var dernierCoupY = data.dernierCoupY;
+		var choixX;
+		var choixY;
+		/*
+		
+		
+			CALCULER LE choixX et choixY a jouer
+		
+		*/
 		// Decomenter cette ligne apres avoir joué le coup
-		// $scope.isPlaying = false;
+		$http.get("http://localhost:8080/turn/" + $scope.idJoueur)
+        .then(function success(response) {
+			$scope.isPlaying = false;
+        }, function error(reponse) {
+		});
 	};
 	
 	$scope.getTurnInfo = function(){
         $http.get("http://localhost:8080/turn/" + $scope.idJoueur)
         .then(function success(response) {
-			console.log("turnInfo " + response.data.status);
-            if(response.data.status == 1 && !isPlaying) {
+			$scope.plateauJeu = response.data.tableau;
+			$scope.nbCoupJoue = response.data.numTour;
+            if(response.data.status == 1 && !$scope.isPlaying) {
 				$scope.isPlaying = true;
 				$scope.myTurnToPlay(response.data);
 			}   
