@@ -86,7 +86,7 @@ function gestionTenaillesHaut(numeroJoueur, x, y) {
 				// tenaille haut du pion posé
 				nbTenaillesJ1++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x - 1][y] = 0;
@@ -98,7 +98,7 @@ function gestionTenaillesHaut(numeroJoueur, x, y) {
 				// tenaille haut diagonale droite du pion posé
 				nbTenaillesJ1++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x - 1][y + 1] = 0;
@@ -110,7 +110,7 @@ function gestionTenaillesHaut(numeroJoueur, x, y) {
 				// tenaille haut diagonale gauche du pion posé
 				nbTenaillesJ1++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x - 1][y - 1] = 0;
@@ -124,7 +124,7 @@ function gestionTenaillesHaut(numeroJoueur, x, y) {
 				// tenaille haut du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x - 1][y] = 0;
@@ -136,7 +136,7 @@ function gestionTenaillesHaut(numeroJoueur, x, y) {
 				// tenaille haut diagonale droite du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x - 1][y + 1] = 0;
@@ -148,7 +148,7 @@ function gestionTenaillesHaut(numeroJoueur, x, y) {
 				// tenaille haut diagonale gauche du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x - 1][y - 1] = 0;
@@ -166,7 +166,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 				// tenaille bas du pion posé
 				nbTenaillesJ1++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x + 1][y] = 0;
@@ -178,7 +178,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 				// tenaille bas diagonale droite du pion posé
 				nbTenaillesJ1++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x + 1][y + 1] = 0;
@@ -190,7 +190,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 				// tenaille bas diagonale gauche du pion posé
 				nbTenaillesJ1++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x + 1][y - 1] = 0;
@@ -204,7 +204,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 				// tenaille bas du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x + 1][y] = 0;
@@ -216,7 +216,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 				// tenaille bas diagonale droite du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x + 1][y + 1] = 0;
@@ -228,7 +228,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 				// tenaille bas diagonale gauche du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x + 1][y - 1] = 0;
@@ -246,7 +246,7 @@ function gestionTenaillesCote(numeroJoueur, x, y) {
 				// tenaille à gauche du pion posé
 				nbTenaillesJ1++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x][y - 1] = 0;
@@ -258,7 +258,7 @@ function gestionTenaillesCote(numeroJoueur, x, y) {
 				// tenaille à droite du pion posé
 				nbTenaillesJ1++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x][y + 1] = 0;
@@ -272,7 +272,7 @@ function gestionTenaillesCote(numeroJoueur, x, y) {
 				// tenaille à gauche du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x][y - 1] = 0;
@@ -284,7 +284,7 @@ function gestionTenaillesCote(numeroJoueur, x, y) {
 				// tenaille à droite du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
-					messageFinPartie = "Le joueur" + tourJoueur.groupName + " gagne en mort subite - tenaille";
+					messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne en mort subite - tenaille";
 					finDePartie = true;
 				}
 				plateauJeu[x][y + 1] = 0;
@@ -391,23 +391,8 @@ function gestionLigneDiagonaleHautDroiteBasGauche(numeroJoueur, x, y) {
 }
 
 function playerTooLong() {
-	messageFinPartie = "Le joueur" + tourJoueur.groupName + " a perdu, temps d'attente trop long";
+	messageFinPartie = "Le joueur " + tourJoueur.groupName + " a perdu, temps d'attente trop long";
 	finDePartie = true;
-	setTimeout(function() {
-		playerTab = [];
-		plateauJeu = [];
-		nombreDeTour = 0;
-		nbTenaillesJ1 = 0;
-		nbTenaillesJ2 = 0;
-		numJoueur = 1;
-		dernierCoupX;
-		dernierCoupY;
-		tourJoueur;
-		finDePartie = false;
-		mortSubite = false;
-		timeout = null;
-		messageFinPartie = null;
-	}, 1000);
 }
 // FIN FONCTION UTILES POUR LE CODE
 
@@ -431,21 +416,6 @@ router.get('/connect/:groupName', function(req, res) {
 				else {
 					messageFinPartie = "Le joueur " + nbTenaillesJ1 > nbTenaillesJ2 ? getPlayerWithNumber(1).groupName : getPlayerWithNumber(2).groupName+ " gagne au nombre de tenaille";
 					finDePartie = true;
-					setTimeout(function() {
-						playerTab = [];
-						plateauJeu = [];
-						nombreDeTour = 0;
-						nbTenaillesJ1 = 0;
-						nbTenaillesJ2 = 0;
-						numJoueur = 1;
-						dernierCoupX;
-						dernierCoupY;
-						tourJoueur;
-						finDePartie = false;
-						mortSubite = false;
-						timeout = null;
-						messageFinPartie = null;
-					}, 1000);
 				}
 			}, (1000*60*10));
 		}
@@ -502,23 +472,6 @@ router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
 			if (nbTenaillesJ1 == 5 || nbTenaillesJ2 == 5) {
 				messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne au nombre de tenailles";
 				finDePartie = true;
-			}
-			if (finDePartie) {
-				setTimeout(function() {
-					playerTab = [];
-					plateauJeu = [];
-					nombreDeTour = 0;
-					nbTenaillesJ1 = 0;
-					nbTenaillesJ2 = 0;
-					numJoueur = 1;
-					dernierCoupX;
-					dernierCoupY;
-					tourJoueur;
-					finDePartie = false;
-					mortSubite = false;
-					timeout = null;
-					messageFinPartie = null;
-				}, 1000);
 			}
 			tourJoueur = getOtherPlayer(req.params.idJoueur);
 			clearTimeout(timeout)
