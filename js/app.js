@@ -2,6 +2,7 @@ var app = angular.module("penteApp", []);
 
 app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', function($scope, $http, $interval, $timeout) {
 	$scope.connnected = false;
+	$scope.apiURL = "http://localhost:8080/";
 	$scope.idJoueur;
 	$scope.numJoueur;
 	$scope.nomJoueur;
@@ -18,9 +19,32 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 	$scope.gameMode;
 	$scope.tempData;
 	$scope.isFinPartie = false;
+	$scope.globalTimerStarted = false;
+	$scope.minuteGlobal;
+	$scope.secondGlobal;
+	
+	//TIMER 10M
+	$scope.startGlobalTimer = function() {
+		var countDownDate = new Date();
+		countDownDate.setMinutes(countDownDate.getMinutes() + 10);
+
+		var x = setInterval(function() {
+		  var now = new Date().getTime();
+		  var distance = countDownDate - now;
+		  
+		  if (distance < 0) {
+			clearInterval(x);
+		  }
+		  
+		  $scope.minuteGlobal = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		  $scope.minuteGlobal < 10 ? $scope.minuteGlobal = "0"+$scope.minuteGlobal : $scope.minuteGlobal < 1 ? $scope.minuteGlobal = "00" : null;
+		  $scope.secondGlobal = Math.floor((distance % (1000 * 60)) / 1000);
+		  $scope.secondGlobal < 10 ? $scope.secondGlobal = "0"+$scope.secondGlobal : $scope.secondGlobal < 1 ? $scope.secondGlobal = "00" : null;
+		}, 1000);
+	}	
 	
 	$scope.joinGame = function(gameMode) {
-		$http.get("http://localhost:8080/connect/" + $scope.nomJoueur)
+		$http.get($scope.apiURL + "/connect/" + $scope.nomJoueur)
 		.then(function success(response) {
 			var data = response.data;
 			$scope.connected = true;
@@ -30,18 +54,23 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 			$scope.interval = $interval($scope.getTurnInfo,500)
 			
 		}, function error(response) {
-			console.log(response);
-			$scope.errorMessage.error = true;
-			$scope.errorMessage.message = response.data.error;
+			if (response.data == undefined || response.data == null) {
+				$scope.errorMessage.error = true;
+				$scope.errorMessage.message = "Erreur inconnue / serveur indisponible";
+			}
+			else {
+				$scope.errorMessage.error = true;
+				$scope.errorMessage.message = response.data.error;
+			}			
 		});
 	};
 	
 	$scope.makeAPlay = function(x, y) {
 		if ($scope.isPlaying) {
-			$http.get("http://localhost:8080/play/" + x + "/" + y + "/" + $scope.idJoueur)
+			$http.get($scope.apiURL + "/play/" + x + "/" + y + "/" + $scope.idJoueur)
 			.then(function success(response) {
 				$scope.isPlaying = false;
-			}, function error(reponse) {
+			}, function error(response) {
 				$scope.errorInPlay.active = true;
 				$scope.errorInPlay.message = response.data.error;
 				$scope.isPlaying = true;
@@ -60,6 +89,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		var choixX;
 		var choixY;
 		$scope.tempData = data;
+		
 		if ($scope.nbCoupJoue == 0) {
 			choixX = choixY = 9;
 		}
@@ -76,7 +106,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 			$interval.cancel($scope.interval);
 		}
 		else {
-			$http.get("http://localhost:8080/play/" + choixX + "/" + choixY + "/" + $scope.idJoueur)
+			$http.get($scope.apiURL + "/play/" + choixX + "/" + choixY + "/" + $scope.idJoueur)
 			.then(function success(response) {
 				$scope.isPlaying = false;
 			}, function error(response) {
@@ -92,11 +122,11 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 	};
 	
 	$scope.getTurnInfo = function(){
-        $http.get("http://localhost:8080/turn/" + $scope.idJoueur)
+        $http.get($scope.apiURL + "/turn/" + $scope.idJoueur)
         .then(function success(response) {
 			$scope.plateauJeu = response.data.tableau;
 			$scope.nbCoupJoue = response.data.numTour;
-			$scope.finPartie = response.data.finPartie;
+			$scope.isFinPartie = response.data.finPartie;
 			$scope.nbTenaillesJ1 = response.data.nbTenaillesJ1;
 			$scope.nbTenaillesJ2 = response.data.nbTenaillesJ2;
 			if (response.data.finPartie) {
@@ -106,10 +136,14 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 			}
             if(response.data.status == 1 && !$scope.isPlaying) {
 				$scope.isPlaying = true;
+				if (!$scope.globalTimerStarted) {
+					$scope.globalTimerStarted = true;
+					$scope.startGlobalTimer();
+				}
 				if ($scope.gameMode == 'machine')
 					$scope.myTurnToPlay(response.data);
 			}   
-        }, function error(reponse) {
+        }, function error(response) {
 			if ($scope.isFinPartie)
 				$interval.cancel($scope.interval);
 			else {

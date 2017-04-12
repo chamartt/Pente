@@ -14,8 +14,8 @@
         <div id="connection-form">
             <label>Identifiant</label>
             <input type="text" ng-model="nomJoueur"/>
-            <label>Domaine ou IP</label>
-            <input type="text" value="kbellot.eu"/>
+            <label>API URL</label>
+            <input type="text" ng-model="apiURL"/>
             <div id="btn-align">
                 <div class="btn" ng-click="joinGame('machine')">Machine</div>
                 <div id="spacer"></div>
@@ -49,10 +49,18 @@
                 <div class="container-details-game">
                     <div class="details-line">
                         <div class="container-left">
-                            <span class="labels">Temps restant global (~1)</span>
+                            <span class="labels" ng-cloak>Temps global restant</span>
                         </div>
                         <div class="container-right">
-                            <span class="values">5:30</span>
+                            <span class="values" ng-cloak>{{ minuteGlobal + ':' + secondGlobal }}</span>
+                        </div>
+                    </div>
+					<div class="details-line">
+                        <div class="container-left">
+                            <span class="labels" ng-cloak>Temps pour le tour</span>
+                        </div>
+                        <div class="container-right">
+                            <span class="values" ng-cloak>{{ secondCounter }}</span>
                         </div>
                     </div>
                     <div class="details-line">
