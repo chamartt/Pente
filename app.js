@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 // DEBUT VARIABLE DU JEU
 var playerTab = [];
-var plateauJeu = [];
+plateauJeu = [];
 var nombreDeTour = 0;
 var nbTenaillesJ1 = 0;
 var nbTenaillesJ2 = 0;
@@ -62,17 +62,24 @@ function getOtherPlayer(token) {
 }
 function logPlateauJeu() {
 	for (var i = 0; i < plateauJeu.length; i++) {
-		console.log(plateauJeu[i]);
+		for (var j = 0; j < plateauJeu[i].length; j++) {
+			console.log(plateauJeu[i][j]);
+		}
 	}
 }
 
 function generateJeu() {
-	for (var i = 0; i < 19; i++) {
-		plateauJeu.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+	for(var i = 0; i <= 18; ++i) {
+		plateauJeu[i] = [];
+		for(var j = 0; j <= 18; j++) {
+			plateauJeu[i][j] = 0;
+		}
 	}
 }
 
 function gestionTenaillesHaut(numeroJoueur, x, y) {
+	x = parseInt(x);
+	y = parseInt(y);
 	if (numeroJoueur == 1) {
 		if (x - 3 >= 0) {
 			if (plateauJeu[x - 1][y] == 2 && plateauJeu[x - 2][y] == 2 && plateauJeu[x - 3][y] == 1) {
@@ -151,6 +158,8 @@ function gestionTenaillesHaut(numeroJoueur, x, y) {
 	}
 }
 function gestionTenaillesBas(numeroJoueur, x, y) {
+	x = parseInt(x);
+	y = parseInt(y);
 	if (numeroJoueur == 1) {
 		if (x + 3 <= 18) {
 			if (plateauJeu[x + 1][y] == 2 && plateauJeu[x + 2][y] == 2 && plateauJeu[x + 3][y] == 1) {
@@ -191,7 +200,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 	}
 	else {
 		if (x + 3 <= 18) {
-			if (plateauJeu[x + 1][y] == 1 && plateauJeu[x + 2][y] == 1 && plateauJeu[x + 3][y] == 2) {
+			if (plateauJeu[x + 1][y] == 2 && plateauJeu[x + 2][y] == 2 && plateauJeu[x + 3][y] == 1) {
 				// tenaille bas du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
@@ -203,7 +212,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 			}
 		}
 		if (x + 3 <= 18 && y + 3 <= 18) {
-			if (plateauJeu[x + 1][y + 1] == 1 && plateauJeu[x + 2][y + 2] == 1 && plateauJeu[x + 3][y + 3] == 2) {
+			if (plateauJeu[x + 1][y + 1] == 2 && plateauJeu[x + 2][y + 2] == 2 && plateauJeu[x + 3][y + 3] == 1) {
 				// tenaille bas diagonale droite du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
@@ -215,7 +224,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 			}
 		}
 		if (x + 3 <= 18 && y - 3 >= 0) {
-			if (plateauJeu[x + 1][y - 1] == 1 && plateauJeu[x + 2][y - 2] == 1 && plateauJeu[x + 3][y - 3] == 2) {
+			if (plateauJeu[x + 1][y - 1] == 2 && plateauJeu[x + 2][y - 2] == 2 && plateauJeu[x + 3][y - 3] == 1) {
 				// tenaille bas diagonale gauche du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
@@ -229,6 +238,8 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 	}
 }
 function gestionTenaillesCote(numeroJoueur, x, y) {
+	x = parseInt(x);
+	y = parseInt(y);
 	if (numeroJoueur == 1) {
 		if (y - 3 >= 0) {
 			if (plateauJeu[x][y - 1] == 2 && plateauJeu[x][y - 2] == 2 && plateauJeu[x][y - 3] == 1) {
@@ -285,15 +296,17 @@ function gestionTenaillesCote(numeroJoueur, x, y) {
 
 function gestionLigneVerticale(numeroJoueur, x, y) {
 	var countConsecutive = 0;
+	x = parseInt(x);
+	y = parseInt(y);
 	for (var i = x; i <= 18; i++) {
-		if (plateau[i][y] == numeroJoueur)
+		if (plateauJeu[i][y] == numeroJoueur)
 			countConsecutive++;
 		else
 			break;
 	}
 	if (x - 1 >= 0) {
 		for (var i = x - 1; i >= 0; i--) {
-			if (plateau[i][y] == numeroJoueur)
+			if (plateauJeu[i][y] == numeroJoueur)
 				countConsecutive++;
 			else
 				break;
@@ -306,15 +319,17 @@ function gestionLigneVerticale(numeroJoueur, x, y) {
 }
 function gestionLigneHorizontale(numeroJoueur, x, y) {
 	var countConsecutive = 0;
+	x = parseInt(x);
+	y = parseInt(y);
 	for (var i = y; i <= 18; i++) {
-		if (plateau[x][i] == numeroJoueur)
+		if (plateauJeu[x][i] == numeroJoueur)
 			countConsecutive++;
 		else
 			break;
 	}
 	if (y - 1 >= 0) {
 		for (var i = y - 1; y >= 0; i--) {
-			if (plateau[x][i] == numeroJoueur)
+			if (plateauJeu[x][i] == numeroJoueur)
 				countConsecutive++;
 			else
 				break;
@@ -328,16 +343,18 @@ function gestionLigneHorizontale(numeroJoueur, x, y) {
 
 function gestionLigneDiagonaleHautGaucheBasDroite(numeroJoueur, x, y) {
 	var countConsecutive = 0;
+	x = parseInt(x);
+	y = parseInt(y);
 	var i, j;
 	for (i = x, j = y; i <= 18 && j <= 18; i++, j++) {
-		if (plateau[i][j] == numeroJoueur)
+		if (plateauJeu[i][j] == numeroJoueur)
 			countConsecutive++;
 		else
 			break;
 	}
 	if (y - 1 >= 0 && x - 1 >= 0) {
 		for (i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--) {
-			if (plateau[i][j] == numeroJoueur)
+			if (plateauJeu[i][j] == numeroJoueur)
 				countConsecutive++;
 			else
 				break;
@@ -351,15 +368,17 @@ function gestionLigneDiagonaleHautGaucheBasDroite(numeroJoueur, x, y) {
 function gestionLigneDiagonaleHautDroiteBasGauche(numeroJoueur, x, y) {
 	var countConsecutive = 0;
 	var i, j;
+	x = parseInt(x);
+	y = parseInt(y);
 	for (i = x, j = y; i >= 0 && j <= 18; i--, j++) {
-		if (plateau[i][j] == numeroJoueur)
+		if (plateauJeu[i][j] == numeroJoueur)
 			countConsecutive++;
 		else
 			break;
 	}
 	if (y - 1 >= 0 && x + 1 <= 18) {
 		for (i = x + 1, j = y - 1; i <= 18 && j >= 0; i++, j--) {
-			if (plateau[i][j] == numeroJoueur)
+			if (plateauJeu[i][j] == numeroJoueur)
 				countConsecutive++;
 			else
 				break;
@@ -428,6 +447,12 @@ router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
 		}
 		else if (plateauJeu[req.params.posX][req.params.posY] != 0) {
 			res.status(406).send({error: "Coup invalide, place deja prise"});
+		}
+		else if(nombreDeTour == 0 && (req.params.posX != 9 || req.params.posY != 9)) {
+			res.status(406).send({error : "Premier coup au milieu : 9/9"});
+		}
+		else if(nombreDeTour == 2 && ((req.params.posX > 6 && req.params.posX < 12) || (req.params.posY > 6 && req.params.posY < 12))) {
+			res.status(406).send({error: "Premier joueur doit jouer à l'exterieur du carré de son premier coup (3 intersections de marge)"});
 		}
 		else {
 			// Place le pion
