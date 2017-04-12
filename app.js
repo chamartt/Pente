@@ -507,7 +507,7 @@ app.use('/', router);
 
 // START THE SERVER
 // Run app on port 3000
-server.listen('8080', function(){
+server.listen('80', function(){
     var host = server.address().address,
         port = server.address().port;
 
