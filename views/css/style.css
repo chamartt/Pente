@@ -2,7 +2,7 @@
     html, body {
         width: 100%;
         height: 100%;
-        min-width: 800px;
+        min-width: 1300px;
         margin: 0;
         padding: 0;
     }
@@ -15,7 +15,6 @@
         display: inline-block;
         float: left;
     }
-
 /*** CONNEXION ***/
     #connection {
         width: 10%;
@@ -23,6 +22,7 @@
         font-family: 'Roboto', sans-serif;
         margin-top: 50vh;
         transform: translateY(-50%);
+        display:none;
     }
     #connection-form {
 
@@ -76,7 +76,7 @@
 
 /*** PLATEAU ***/
     #game {
-        display: none;
+        display: default;
     }
     #game > div.container-right{
         width: 45%;
@@ -88,7 +88,7 @@
     }
     #turn-time {
         width: 100%;
-        padding: 20px 0px 0px 385px;
+        padding: 20px 0px 0px 400px;
         font-family: 'Roboto', sans-serif;
         font-size: 16pt;
     }
@@ -100,11 +100,11 @@
         font-size: 14pt;
     }
     #board {
-        padding: 20px;
         width: 800px;
-        height: 600px;
+        height: 100%;
         font-family: 'Spirax', cursive;
         font-size: 16pt;
+        padding: 5px 20px 20px 20px;
     }
         .row {
         width: 100%;
@@ -126,7 +126,9 @@
         background: lightgrey;
         border-radius: 30px;
     }
-
+    .hidden-cell {
+        visibility: hidden;
+    }
 /*** DETAILS DE LA PARTIE ***/
     #details-title {
         font-family: 'Roboto', sans-serif;
@@ -137,24 +139,30 @@
         font-family: 'Roboto', sans-serif;
     }
     .details-section {
-        font-weight: bold;
-        font-size: 16pt;
+        font-size: 14pt;
     }
-    fieldset {
+    .player-section:first-of-type {
+        margin-bottom: 30px;
+    }
+    .fieldset-details {
         margin-bottom: 10px;
+        background-color: #CCC
     }
-    legend {
+    .legend-details {
         border: solid grey 1px;
         border-radius: 5px;
+        background-color: white;
+        font-weight: bold;
+        font-size: 18pt;
     }
     .details-line {
-
+        display:inline-block;
+        width: 100%;
     }
     .labels {
         display: inline-block;
-        color: grey;
+        color: #333;
     }
     .values {
         display: inline-block;
-        font-weight: bold;
     }
