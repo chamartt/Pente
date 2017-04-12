@@ -451,7 +451,7 @@ router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
 		else if(nombreDeTour == 0 && (req.params.posX != 9 || req.params.posY != 9)) {
 			res.status(406).send({error : "Premier coup au milieu : 9/9"});
 		}
-		else if(nombreDeTour == 2 && ((req.params.posX > 6 && req.params.posX < 12) || (req.params.posY > 6 && req.params.posY < 12))) {
+		else if(nombreDeTour == 2 && ((req.params.posX >= 6 && req.params.posX <= 12) && (req.params.posY >= 6 && req.params.posY <= 12))) {
 			res.status(406).send({error: "Premier joueur doit jouer à l'exterieur du carré de son premier coup (3 intersections de marge)"});
 		}
 		else {
