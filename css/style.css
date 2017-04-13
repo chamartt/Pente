@@ -24,8 +24,8 @@
         margin-top: 50vh;
         transform: translateY(-50%);
     }
-    #connection-form {
-
+    #fieldset-connection {
+    	border: solid black 1px;
     }
     #connection-form label {
         font-size: 14pt;
