@@ -19,8 +19,6 @@ class Emplacement{
 	//...
 }
 
-
-// Utilisations de else if car on ne peut pas faire plus de 1x placer_pion()
 private void placer_pion{
 	if(nbTenaillesAdversaire > 2){ // Nombre de tenailles qu'on s'est fait manger
 		if(isPaireAligneeIsoleePersonnel()){
@@ -29,27 +27,24 @@ private void placer_pion{
 	}else if(nbTenaillesPersonnel > 2){
 		// TO DO : Forcer l’adversaire à former des paires “mangeables” (pour faire les deux tenailles manquantes)
 	}else{
-		if(isLigneDeQuatreAdversaire())
-			placer_pion_sur_extremite(ligneDeQuatreAdversaire);
-		else if(isTroisPionsEspacePion())
+		if(isLigneDeQuatre()) // ok
+			placer_pion(pointX,pointY);
+		else if(isDeuxPionsEspaceDeuxPions()) // ok
 			placer_pion(espace);
-		else if(isDeuxPionsEspacePion())
+		else if(isTroisPionsEspacePion()) // ok
 			placer_pion(espace);
-		else if(isLigneDeQuatrePersonnel())
-			placer_pion_sur_extremite(ligneDeQuatrePersonnel);
-		else if(isLigneDeTroisPersonnel())
+		else if(isDeuxPionsEspacePion()) // ok
+			placer_pion(espace);
+		else if(isLigneDeTroisPersonnel()) // ok
 			placer_pion_sur_extremite(ligneDeTroisIsoleePersonnel);
-		else if(isLigneDeTroisAdversaire())
+		else if(isLigneDeTroisAdversaire()) // ok
 			placer_pion_sur_extremite(ligneDeTroisIsoleeAdversaire);
-		else if(isLigneDeDeuxPersonnel()){
+		else if(isLigneDeDeuxPersonnel()) // ok
 			placer_pion_sur_extremite(ligneDeDeuxPersonnel);
-		}else if(tempsPartie>9.99){
-			if(isLigneDeDeuxPersonnel())
-				placer_pion_sur_extremite(ligneDeDeuxPersonnel);
 		else{
-			if(isPaireMangeableAdversaire())
+			if(isPaireMangeableAdversaire()) // ok
 				placer_pion_sur_extremite(paireMangeableAdversaire);
-			else if(isPaireFormable())
+			else if(isPaireFormablePersonnel()) // ok
 				placer_pion_sur_extremite(pion);
 			else
 				placer_pion_random_nique_sa_merrrrrrrrrrrr();
@@ -57,8 +52,10 @@ private void placer_pion{
 	}
 }
 
-private void placer_pion(Emplacement emplacement){
-	if(nbDuTour=2 && premierJoueur()){
+private void placer_pion(pointX, pointY){
+	if(nbDuTour == 0){
+		// Jouer sur l'intersection centrale
+	}else if(nbDuTour=2){
 		// Jouer dans la zone 5x5
 	}else{
 		//...
@@ -66,25 +63,13 @@ private void placer_pion(Emplacement emplacement){
 }
 
 private void placer_pion_sur_extremite(Combinaison combinaison){
-	if(nbDuTour=2 && premierJoueur()){
+	if(nbDuTour == 0){
+		// Jouer sur l'intersection centrale
+	}else if(nbDuTour=2){
 		// Jouer dans la zone 5x5
 	}else{
 		//...
 	}
-}
-
-private void isPaireAligneeIsoleePersonnel(){
-	// Traitement
-	// ...
-
-	paireAligneePersonnel = resultat_traitement;
-}
-
-private void isLigneDeQuatreAdversaire(){
-	// Traitement
-	// ...
-	
-	ligneDeQuatreAdversaire = resultat_traitement;
 }
 
 //......
