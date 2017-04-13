@@ -460,7 +460,7 @@ router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
 			req.params.posX > 18) {
 			res.status(406).send({error: "Coup invalide, x et y compris entre 0 et 18"});
 		}
-		else if (plateauJeu[parseInt(req.params.posX)][parseInt(req.params.posY)] != 0) {
+		else if (plateauJeu[req.params.posX][req.params.posY] != 0) {
 			res.status(406).send({error: "Coup invalide, place deja prise"});
 		}
 		else if(nombreDeTour == 0 && (req.params.posX != 9 || req.params.posY != 9)) {
