@@ -313,7 +313,7 @@ function gestionLigneVerticale(numeroJoueur, x, y) {
 		}
 	}
 	if (countConsecutive >= 5) {
-		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une ligne";
+		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une pente";
 		finDePartie = true;
 	}
 }
@@ -336,7 +336,7 @@ function gestionLigneHorizontale(numeroJoueur, x, y) {
 		}
 	}
 	if (countConsecutive >= 5) {
-		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une ligne";
+		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une pente";
 		finDePartie = true;
 	}
 }
@@ -361,7 +361,7 @@ function gestionLigneDiagonaleHautGaucheBasDroite(numeroJoueur, x, y) {
 		}
 	}
 	if (countConsecutive >= 5) {
-		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une ligne";
+		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une pente";
 		finDePartie = true;
 	}
 }
@@ -385,7 +385,7 @@ function gestionLigneDiagonaleHautDroiteBasGauche(numeroJoueur, x, y) {
 		}
 	}
 	if (countConsecutive >= 5) {
-		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une ligne";
+		messageFinPartie = "Le joueur " + tourJoueur.groupName + " gagne avec une pente";
 		finDePartie = true;
 	}
 }
