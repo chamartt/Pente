@@ -23,6 +23,16 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 	$scope.minuteGlobal;
 	$scope.secondGlobal;
 	
+	$scope.initPlateau = function() {
+		for(var i = 0; i <= 18; ++i) {
+			$scope.plateauJeu[i] = [];
+			for(var j = 0; j <= 18; j++) {
+				$scope.plateauJeu[i][j] = 0;
+			}
+		}
+	};
+	
+	$scope.initPlateau();
 	//TIMER 10M
 	$scope.startGlobalTimer = function() {
 		var countDownDate = new Date();
@@ -145,7 +155,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 	$scope.getTurnInfo = function(){
         $http.get($scope.apiURL + "/turn/" + $scope.idJoueur)
         .then(function success(response) {
-			$scope.plateauJeu = response.data.tableau;
+			$scope.plateauJeu = response.data.tableau != null ? response.data.tableau : $scope.plateauJeu;
 			$scope.nbCoupJoue = response.data.numTour;
 			$scope.isFinPartie = response.data.finPartie;
 			$scope.nbTenaillesJ1 = response.data.nbTenaillesJ1;
