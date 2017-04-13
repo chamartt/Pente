@@ -400,6 +400,21 @@ function playerTooLong() {
 var router = express.Router();
 
 router.get('/connect/:groupName', function(req, res) {
+	if (finDePartie) {
+		playerTab = [];
+		plateauJeu = [];
+		nombreDeTour = 0;
+		nbTenaillesJ1 = 0;
+		nbTenaillesJ2 = 0;
+		numJoueur = 1;
+		dernierCoupX;
+		dernierCoupY;
+		tourJoueur;
+		finDePartie = false;
+		mortSubite = false;
+		timeout = null;
+		messageFinPartie = null;
+	}
 	if (playerTab.length >= 2) {
 		res.status(401).send({error: "La partie est en cours"});
 	}
@@ -445,7 +460,7 @@ router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
 			req.params.posX > 18) {
 			res.status(406).send({error: "Coup invalide, x et y compris entre 0 et 18"});
 		}
-		else if (plateauJeu[req.params.posX][req.params.posY] != 0) {
+		else if (plateauJeu[parseInt(req.params.posX)][parseInt(req.params.posY)] != 0) {
 			res.status(406).send({error: "Coup invalide, place deja prise"});
 		}
 		else if(nombreDeTour == 0 && (req.params.posX != 9 || req.params.posY != 9)) {
