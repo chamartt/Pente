@@ -109,6 +109,10 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		else {
 			choixX = Math.floor(Math.random() * 18) + 0;
 			choixY = Math.floor(Math.random() * 18) + 0;
+			while (data.tableau[choixX][choixY] != 0) {
+				choixX = Math.floor(Math.random() * 18) + 0;
+				choixY = Math.floor(Math.random() * 18) + 0;
+			}
 		}
 		// Decomenter cette ligne apres avoir joué le coup
 		if (data.finPartie) {
