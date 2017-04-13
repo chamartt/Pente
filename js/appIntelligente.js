@@ -1177,14 +1177,14 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 					if(!trouve){
 						if (plateauJeu[x][y] == numJoueur){
 							// Scan vers la droite
-							if((y+1)<=18 &&plateauJeu[x][y+1] == numJoueur){
+							if((y+1)<=18 &&plateauJeu[x][y+1] == 0){
 								pointX = x;
 								pointY = y+1;
 								trouve = true;
 							}
 							
 							// Scan vers la gauche
-							if((y-1)>=0 && plateauJeu[x][y-1] == numJoueur ){
+							if((y-1)>=0 && plateauJeu[x][y-1] == 0){
 								pointX = x;
 								pointY = y-1;
 								trouve = true;
@@ -1207,13 +1207,13 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 					if(!trouve){
 						if (plateauJeu[x][y] == numJoueur){
 							// Scan vers le haut
-							if((x-1)>=0 && plateauJeu[x-1][y] == numJoueur){
+							if((x-1)>=0 && plateauJeu[x-1][y] == 0){
 								pointX = x-1;
 								pointY = y;
 								trouve = true;
 							}
 							//Scan vers le bas
-							if((x+1)<=18 && plateauJeu[x+1][y] == numJoueur){
+							if((x+1)<=18 && plateauJeu[x+1][y] == 0){
 								pointX = x+1;
 								pointY = y;
 								trouve = true;
@@ -1236,7 +1236,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 					if(!trouve){
 						// Diagonale haut gauche
 						if (plateauJeu[x][y] == numJoueur){
-							if((x-1)>=0 && (y-1)>=0 && plateauJeu[x-1][y-1] == numJoueur ){
+							if((x-1)>=0 && (y-1)>=0 && plateauJeu[x-1][y-1] == 0){
 								pointX = x-1;
 								pointY = y-1;
 								trouve = true;
@@ -1245,7 +1245,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 						
 						// Diagonale haut droite
 						if (plateauJeu[x][y] == numJoueur){
-							if((x-1)>=0 && (y+1)<=18 && plateauJeu[x-1][y+1] == numJoueur){
+							if((x-1)>=0 && (y+1)<=18 && plateauJeu[x-1][y+1] == 0){
 								pointX = x-1;
 								pointY = y-1;
 								trouve = true;
@@ -1254,7 +1254,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 						
 						// Diagonale bas gauche
 						if (plateauJeu[x][y] == numJoueur){
-							if((x+1)<=18 && (y-1)>=0 && plateauJeu[x+1][y-1] == numJoueur){
+							if((x+1)<=18 && (y-1)>=0 && plateauJeu[x+1][y-1] == 0){
 								pointX = x+1;
 								pointY = y-1;
 								trouve = true;
@@ -1263,7 +1263,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 						
 						// Diagonale bas droite
 						if (plateauJeu[x][y] == numJoueur){
-							if((x+1)<=18 && (y+1)<=18 && plateauJeu[x+1][y+1] == numJoueur){
+							if((x+1)<=18 && (y+1)<=18 && plateauJeu[x+1][y+1] == 0){
 								pointX = x+1;
 								pointY = y+1;
 								trouve = true;
