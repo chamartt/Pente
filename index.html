@@ -63,6 +63,11 @@
                             <span class="values">{{ nbCoupJoue }}</span>
                         </div>
                     </div>
+					<div class="details-line" ng-if="isPlaying" ng-cloak>
+                        <div class="container-left">
+                            <span class="labels endgame">A mon tour de jouer</span>
+                        </div>
+                    </div>
                 </div>
             </fieldset>
             <fieldset ng-if="numJoueur == 1" class="fieldset-details" ng-cloak >

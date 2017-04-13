@@ -44,25 +44,34 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 	}	
 	
 	$scope.joinGame = function(gameMode) {
-		$http.get($scope.apiURL + "/connect/" + $scope.nomJoueur)
-		.then(function success(response) {
-			var data = response.data;
-			$scope.connected = true;
-			$scope.idJoueur = data.idJoueur;
-			$scope.gameMode = gameMode;
-			$scope.numJoueur = data.numJoueur;
-			$scope.interval = $interval($scope.getTurnInfo,500)
-			
-		}, function error(response) {
-			if (response.data == undefined || response.data == null) {
-				$scope.errorMessage.error = true;
-				$scope.errorMessage.message = "Erreur inconnue / serveur indisponible";
-			}
-			else {
-				$scope.errorMessage.error = true;
-				$scope.errorMessage.message = response.data.error;
-			}			
-		});
+		if ($scope.nomJoueur.length != 8 || isNaN($scope.nomJoueur.substring(0,4)) || $scope.nomJoueur.substring(4, 8).match(/\d+/g) != null) {
+			$scope.errorMessage.error = true;
+			$scope.errorMessage.message = "Mauvais nom d'équipe : 4 chiffres - 4 lettres";
+			$timeout(function() {
+				$scope.errorMessage = {error: false, message: null};
+			}, 3000);
+		}
+		else {
+			$http.get($scope.apiURL + "/connect/" + $scope.nomJoueur)
+			.then(function success(response) {
+				var data = response.data;
+				$scope.connected = true;
+				$scope.idJoueur = data.idJoueur;
+				$scope.gameMode = gameMode;
+				$scope.numJoueur = data.numJoueur;
+				$scope.interval = $interval($scope.getTurnInfo,500)
+				
+			}, function error(response) {
+				if (response.data == undefined || response.data == null) {
+					$scope.errorMessage.error = true;
+					$scope.errorMessage.message = "Erreur inconnue / serveur indisponible";
+				}
+				else {
+					$scope.errorMessage.error = true;
+					$scope.errorMessage.message = response.data.error;
+				}			
+			});
+		}
 	};
 	
 	$scope.makeAPlay = function(x, y) {
