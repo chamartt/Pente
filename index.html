@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <title>Pente</title>
     <link href="https://fonts.googleapis.com/css?family=Spirax" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
 </head>
 <body ng-app="penteApp" ng-controller="penteCtrl">
 <div id="connection" ng-show="!connected" ng-cloak>
-    <fieldset>
+    <fieldset id="fieldset-connection">
         <legend>Connexion</legend>
         <div id="connection-form">
             <label>Identifiant</label>
@@ -52,7 +51,7 @@
                             <span class="labels" ng-cloak>Temps global restant</span>
                         </div>
                         <div class="container-right">
-                            <span class="values" ng-cloak>{{ minuteGlobal + ':' + secondGlobal }}</span>
+                            <span class="values" ng-init="minuteGlobal='00';secondGlobal='00'" ng-cloak>{{ minuteGlobal + ':' + secondGlobal }}</span>
                         </div>
                     </div>
                     <div class="details-line">

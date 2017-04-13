@@ -2,9 +2,10 @@
     html, body {
         width: 100%;
         height: 100%;
-        min-width: 1300px;
+        min-width: 1500px;
         margin: 0;
         padding: 0;
+        background-color: burlywood;
     }
     .container-left {
         display: inline-block;
@@ -23,8 +24,8 @@
         margin-top: 50vh;
         transform: translateY(-50%);
     }
-    #connection-form {
-
+    #fieldset-connection {
+    	border: solid black 1px;
     }
     #connection-form label {
         font-size: 14pt;
@@ -78,16 +79,13 @@
         text-align: center;
     }
 /*** PLATEAU ***/
-    #game {
-        display: default;
-    }
     #game > div.container-right{
-        width: 45%;
+        width: 47%;
     }
     #game-title {
         font-family: 'Spirax', cursive;
         font-size: 30pt;
-        padding-left: 20px;
+        text-align: center;
     }
     #turn-time {
         width: 100%;
@@ -103,11 +101,15 @@
         font-size: 14pt;
     }
     #board {
-        width: 800px;
+        width: calc(100% - 150px);
         height: 100%;
+        margin: 0 auto;
         font-family: 'Spirax', cursive;
         font-size: 16pt;
-        padding: 5px 20px 20px 20px;
+        padding: 20px;
+        background-color: rgb(255, 140, 0);
+        border-radius: 20px;
+        box-shadow: 4px 4px 8px 2px;
     }
         .row {
         width: 100%;
@@ -140,17 +142,11 @@
         width: 30px;
         height: 30px;
         vertical-align: top;
-        background: lightgrey;
+        background: burlywood;
         border-radius: 30px;
     }
     .hidden-cell {
         visibility: hidden;
-    }
-    .shadow-cell {
-        background: url("../ressources/cross-middle-turn3.png") no-repeat center;
-    }
-    .middle-cell {
-        background: url("../ressources/cross-middle-turn1.png") no-repeat center;
     }
     #turn-other {
         display: none;
@@ -163,12 +159,9 @@
     }
 /*** DETAILS DE LA PARTIE ***/
     #details-title {
-        font-family: 'Roboto', sans-serif;
         font-size: 30pt;
-        padding-bottom: 75px;
-    }
-    #details {
-        font-family: 'Roboto', sans-serif;
+        text-align: center;
+        padding-bottom: 10px;
     }
     .details-section {
         font-size: 14pt;
@@ -178,14 +171,15 @@
     }
     .fieldset-details {
         margin-bottom: 10px;
-        background-color: #CCC
+        background-color: lightgrey;
+        box-shadow: 3px 3px 6px 0px;
     }
     .legend-details {
         border: solid grey 1px;
         border-radius: 5px;
         background-color: white;
         font-weight: bold;
-        font-size: 18pt;
+        font-size: 16pt;
     }
     .details-line {
         display:inline-block;
