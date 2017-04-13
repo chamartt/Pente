@@ -490,7 +490,7 @@ router.get('/play/:posX/:posY/:idJoueur', function(req, res) {
 			}
 			tourJoueur = getOtherPlayer(req.params.idJoueur);
 			clearTimeout(timeout)
-			timeout = setTimeout(playerTooLong, 10000);
+			timeout = setTimeout(playerTooLong, 12000);
 		}
 	} 
 });
