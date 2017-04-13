@@ -15,7 +15,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 	$scope.errorMessage = {error : false, message: null};
 	$scope.detailMessage = {active : false, message: null};
 	$scope.errorInPlay = {active : false, message: null};
-	$scope.plateauJeu;
+	$scope.plateauJeu = [];
 	$scope.gameMode;
 	$scope.tempData;
 	$scope.isFinPartie = false;
@@ -24,7 +24,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 	$scope.secondGlobal;
 	
 	$scope.initPlateau = function() {
-		for(var i = 0; i <= 18; ++i) {
+		for(var i = 0; i <= 18; i++) {
 			$scope.plateauJeu[i] = [];
 			for(var j = 0; j <= 18; j++) {
 				$scope.plateauJeu[i][j] = 0;
@@ -74,9 +74,13 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				$scope.interval = $interval($scope.getTurnInfo,500);
 				
 			}, function error(response) {
-				if (response.data == undefined || response.data == null) {
+				if (response.status == 503) {
 					$scope.errorMessage.error = true;
 					$scope.errorMessage.message = "Erreur inconnue / serveur indisponible";
+				}
+				else if (response.status == 401 || response.data == undefined || response.data == null) {
+					$scope.errorMessage.error = true;
+					$scope.errorMessage.message = "Partie en cours / Non autorisé";
 				}
 				else {
 					$scope.errorMessage.error = true;
@@ -92,9 +96,15 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 			.then(function success(response) {
 				$scope.isPlaying = false;
 			}, function error(response) {
-				$scope.errorInPlay.active = true;
-				$scope.errorInPlay.message = response.data.error;
-				$scope.isPlaying = true;
+				if (response.status == 503) {
+					$scope.errorInPlay.active = true;
+					$scope.errorInPlay.message = "En attente d'un joueur";
+				}
+				else {
+					$scope.errorInPlay.active = true;
+					$scope.errorInPlay.message = response.data.error;
+					$scope.isPlaying = true;
+				}
 				$timeout(function() {
 					$scope.errorInPlay = {active: false, message: null};
 				}, 2000);
@@ -178,9 +188,15 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 			if ($scope.isFinPartie)
 				$interval.cancel($scope.interval);
 			else {
-				$scope.errorInPlay.active = true;
-				$scope.errorInPlay.message = response.data.error;
-				$scope.isPlaying = true;
+				if (response.status == 503) {
+					$scope.errorInPlay.active = true;
+					$scope.errorInPlay.message = "En attente d'un joueur";
+				}
+				else {
+					$scope.errorInPlay.active = true;
+					$scope.errorInPlay.message = response.data.error;
+					$scope.isPlaying = true;
+				}
 				$timeout(function() {
 					$scope.errorInPlay = {active: false, message: null};
 				}, 2000);

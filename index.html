@@ -33,8 +33,11 @@
             <div class="row">
                 <div class="cell-header hidden-cell"></div><div class="cell-header">1</div><div class="cell-header">2</div><div class="cell-header">3</div><div class="cell-header">4</div><div class="cell-header">5</div><div class="cell-header">6</div><div class="cell-header">7</div><div class="cell-header">8</div><div class="cell-header">9</div><div class="cell-header">10</div><div class="cell-header">11</div><div class="cell-header">12</div><div class="cell-header">13</div><div class="cell-header">14</div><div class="cell-header">15</div><div class="cell-header">16</div><div class="cell-header">17</div><div class="cell-header">18</div><div class="cell-header">19</div>
             </div>
-            <div class="row" ng-repeat="x in plateauJeu track by $index" ng-cloak>
+            <div ng-if="gameMode == 'humain'" class="row" ng-repeat="x in plateauJeu track by $index" ng-cloak>
                 <div class="cell-header">{{ $index + 1}}</div><div ng-class="y == 0 ? 'cell' : ( y == 1 ? 'cell-j1' : 'cell-j2')" ng-repeat="y in x track by $index" ng-click="makeAPlay($parent.$index, $index)" ng-cloak></div>
+            </div>
+			<div ng-if="gameMode == 'machine'" class="row" ng-repeat="x in plateauJeu track by $index" ng-cloak>
+                <div class="cell-header">{{ $index + 1}}</div><div ng-class="y == 0 ? 'cell' : ( y == 1 ? 'cell-j1' : 'cell-j2')" ng-repeat="y in x track by $index" ng-cloak></div>
             </div>
         </div>
     </div>
