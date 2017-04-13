@@ -1,0 +1,1028 @@
+// ---------------------- LIGNE DE DEUX ----------------------------
+$scope.isLigneDeDeuxHorizontale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++) {
+		if(!trouve){
+			for (var y = 0; y <= 18; y++)
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers la droite
+						if((y+1)<=18 && plateauJeu[x][y+1] == numJoueur){
+							if((y-1)>=0 && plateauJeu[x][y-1] == 0){
+								pointX = x;
+								pointY = y-1;
+								trouve = true;
+							}
+							if((y+2)<=18 && plateauJeu[x][y+2] == 0){
+								pointX = x;
+								pointY = y+3;
+								trouve = true;
+							}
+						}
+						
+						// Scan vers la gauche
+						if((y-1)>=0 && plateauJeu[x][y-1] == numJoueur){
+							if((y-2)>=0 && plateauJeu[x][y-2] == 0){
+								pointX = x;
+								pointY = y-2;
+								trouve = true;
+							}
+							if((y+1)<=18 && plateauJeu[x][y+1] == 0){
+								pointX = x;
+								pointY = y+1;
+								trouve = true;
+							}
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isLigneDeDeuxVerticale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers le haut
+						if((x-1)>=0 && plateauJeu[x-1][y] == numJoueur){
+							if((x-2)>=0 && plateauJeu[x-2][y] == 0){
+								pointX = x-2;
+								pointY = y;
+								trouve = true;
+							}
+							if((x+1)<=18 && plateauJeu[x+1][y] == 0){
+								pointX = x+1;
+								pointY = y;
+								trouve = true;
+							}
+						}
+						//Scan vers le bas
+						if((x+1)<=18 && plateauJeu[x+1][y] == numJoueur){
+							if((x-2)>=0 && plateauJeu[x-2][y] == 0){
+								pointX = x-2;
+								pointY = y;
+								trouve = true;
+							}
+							if((x+4)<=18 && plateauJeu[x+4][y] == 0){
+								pointX = x+4;
+								pointY = y;
+								trouve = true;
+							}
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isLigneDeDeuxDiagonale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					// Diagonale haut gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y-1)>=0 && plateauJeu[x-1][y-1] == numJoueur){
+							if((x-2)>=0 && (y-2)>=0 && plateauJeu[x-2][y-2] == 0){
+								pointX = x-2;
+								pointY = y-2;
+								trouve = true;
+							}
+							if((x+1)<=18 && (y+1)<=18 && plateauJeu[x+1][y+1] == 0){
+								pointX = x+1;
+								pointY = y+1;
+								trouve = true;
+							}
+						}
+					}
+					
+					// Diagonale haut droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y+1)<=18 && plateauJeu[x-1][y+1] == numJoueur){
+							if((x-2)>=0 && (y+2)<=18 && plateauJeu[x-2][y+2] == 0){
+								pointX = x-2;
+								pointY = y+2;
+								trouve = true;
+							}
+							if((x+1)>=0 && (y-1)>=0 && plateauJeu[x+1][y-1] == 0){
+								pointX = x+1;
+								pointY = y-1;
+								trouve = true;
+							}
+						}
+					}
+					
+					// Diagonale bas gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y-1)>=0 && plateauJeu[x+1][y-1] == numJoueur){
+							if((x+2)<=18 && (y-2)>=0 && plateauJeu[x+2][y-2] == 0){
+								pointX = x+2;
+								pointY = y-2;
+								trouve = true;
+							}
+							if((x-1)>=0 && (y+1)<=18 && plateauJeu[x-1][y+1] == 0){
+								pointX = x-1;
+								pointY = y+1;
+								trouve = true;
+							}
+						}
+					}
+					
+					// Diagonale bas droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y+1)<=18 && plateauJeu[x+1][y+1] == numJoueur){
+							if((x-1)>=0 && (y-1)>=0 && plateauJeu[x-1][y-1] == 0){
+								pointX = x-1;
+								pointY = y-1;
+								trouve = true;
+							}
+								
+							if((x+2)<=18 && (y+2)<=18 && plateauJeu[x+2][y+2] == 0){
+								pointX = x+2;
+								pointY = y+2;
+								trouve = true;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// ---------------------- LIGNE DE TROIS ----------------------------
+$scope.isLigneDeTroisHorizontale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++) {
+		if(!trouve){
+			for (var y = 0; y <= 18; y++)
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers la droite
+						if((y+1)<=18 && (y+2) <=18 && plateauJeu[x][y+1] == numJoueur && plateauJeu[x][y+2] == numJoueur){
+							if((y-1)>=0 && plateauJeu[x][y-1] == 0){
+								pointX = x;
+								pointY = y-1;
+								trouve = true;
+							}
+							if((y+3)<=18 && plateauJeu[x][y+3] == 0){
+								pointX = x;
+								pointY = y+3;
+								trouve = true;
+							}
+						}
+						
+						// Scan vers la gauche
+						if((y-1)>=0 && (y-2)>=0 && plateauJeu[x][y-1] == numJoueur && plateauJeu[x][y-2] == numJoueur){
+							if((y-3)>=0 && plateauJeu[x][y-3] == 0){
+								pointX = x;
+								pointY = y-3;
+								trouve = true;
+							}
+							if((y+1)<=18 && plateauJeu[x][y+1] == 0){
+								pointX = x;
+								pointY = y+1;
+								trouve = true;
+							}
+						}
+						
+						
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isLigneDeTroisVerticale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers le haut
+						if((x-1)>=0 && (x-2)>=0 && plateauJeu[x-1][y] == numJoueur && plateauJeu[x-2][y] == numJoueur){
+							if((x-3)>=0 && plateauJeu[x-3][y] == 0){
+								pointX= x-3;
+								pointY = y;
+								trouve = true;
+							}
+							if((x+1)<=18 && plateauJeu[x+1][y] == 0){
+								pointX= x+1;
+								pointY = y;
+								trouve = true;
+							}
+						}
+						
+						//Scan vers le bas
+						if((x+1)<=18 && (x+2)<=18 && plateauJeu[x+1][y] == numJoueur && plateauJeu[x+2][y] == numJoueur){
+							if((x-1)>=0 && plateauJeu[x-1][y] == 0){
+								pointX = x-1;
+								pointY = y;
+								trouve = true;
+							}
+							if((x+3)<=18 && plateauJeu[x+3][y] == 0){
+								pointX = x+3;
+								pointY = y;
+								trouve = true;
+							}
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isLigneDeTroisDiagonale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					// Diagonale haut gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y-1)>=0 && (x-2)>=0 && (y-2)>=0 && plateauJeu[x-1][y-1] == numJoueur && plateauJeu[x-2][y-2] == numJoueur){
+							if((x-3)>=0 && (y-3)>=0 && plateauJeu[x-3][y-3] == 0){
+								pointX = x-3;
+								pointY = y-3;
+								trouve=true;
+							}
+							if((x+1)<=18 && (y+1)<=18 && plateauJeu[x+1][y+1] == 0){
+								pointX = x+1;
+								pointY = y+1;
+								trouve=true;
+							}
+						}
+					}
+					
+					// Diagonale haut droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y+1)<=18 && (x-2)>=0 && (y+2)<=18 && plateauJeu[x-1][y+1] == numJoueur && plateauJeu[x-2][y+2] == numJoueur){
+							if((x-3)>=0 && (y+3)<=18 && plateauJeu[x-3][y+3] == 0){
+								pointX = x-3;
+								pointY = y+3;
+								trouve = true;
+							}
+							if((x+1)>=0 && (y-1)>=0 && plateauJeu[x+1][y-1] == 0){
+								pointX = x+1;
+								pointY = y-1;
+								trouve = true;
+							}
+						}
+					}
+					
+					// Diagonale bas gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y-1)>=0 && (x+2)<=18 && (y-2)>=0 && plateauJeu[x+1][y-1] == numJoueur && plateauJeu[x+2][y-2] == numJoueur){
+							if((x+3)<=18 && (y-3)>=0 && plateauJeu[x+3][y-3] == 0){
+								pointX = x+3;
+								pointY = y-3;
+								trouve = true;
+							}
+							if((x-1)>=0 && (y+1)<=18 && plateauJeu[x-1][y+1] == 0){
+								pointX = x-1;
+								pointY = y+1;
+								trouve = true;
+							}
+						}
+					}
+					
+					// Diagonale bas droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y+1)<=18 && (x+2)<=18 && (y+2)<=18 && plateauJeu[x+1][y+1] == numJoueur && plateauJeu[x+2][y+2] == numJoueur){
+							if((x-1)>=0 && (y-1)>=0 && plateauJeu[x-1][y-1] == 0){
+								pointX = x-1;
+								pointY = y-1;
+								trouve = true;
+							}
+							if((x+3)<=18 && (y+3)<=18 && plateauJeu[x+3][y+3] == 0){
+								pointX = x+3;
+								pointY = y+3;
+								trouve = true;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// ------------------ LIGNE DE QUATRE ------------------					
+$scope.isLigneDeQuatreHorizontale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++) {
+		if(!trouve){
+			for (var y = 0; y <= 18; y++)
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers la droite
+						if((y+1)<=18 && (y+2)<=18 && (y+3)<=18 && plateauJeu[x][y+1] == numJoueur && plateauJeu[x][y+2] == numJoueur && plateauJeu[x][y+3] == numJoueur){
+							if((y-1)>=0 && plateauJeu[x][y-1] == 0){
+								pointX = x;
+								pointY = y-1;
+								trouve = true;
+							}
+							if((y+4)<=18 && plateauJeu[x][y+4] == 0){
+								pointX = x;
+								pointY = y+4;
+								trouve = true;
+							}
+						}
+						
+						// Scan vers la gauche
+						if((y-1)>=0 && (y-2)>=0 && (y-3)>=0 && plateauJeu[x][y-1] == numJoueur && plateauJeu[x][y-2] == numJoueur && plateauJeu[x][y-3] == numJoueur){
+							if((y-4)>=0 && plateauJeu[x][y-4] == 0){
+								pointX = x;
+								pointY = y-4;
+								trouve = true;
+							}
+							if((y+1)<=18 && plateauJeu[x][y+1] == 0){
+								pointX = x;
+								pointY = y+1;
+								trouve = true;
+							}
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isLigneDeQuatreVerticale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers le haut
+						if((x-1)>=0 && (x-2)>=0 && (x-3)>=0 && plateauJeu[x-1][y] == numJoueur && plateauJeu[x-2][y] == numJoueur && plateauJeu[x-3][y] == numJoueur){
+							if((x-4)>=0 && plateauJeu[x-4][y] == 0){
+								pointX = x-4;
+								pointY = y;
+								trouve = true;
+							}
+							if((x+1)<=18 && plateauJeu[x+1][y] == 0){
+								pointX = x+1;
+								pointY = y;
+								trouve = true;
+							}
+						}
+						//Scan vers le bas
+						if((x+1)<=18 && (x+2)<=18 && (x+3)<=18 && plateauJeu[x+1][y] == numJoueur && plateauJeu[x+2][y] == numJoueur && plateauJeu[x+3][y] == numJoueur){
+							if((x-1)>=0 && plateauJeu[x-1][y] == 0){
+								pointX = x-1;
+								pointY = y;
+								trouve = true;
+							}
+							if((x+4)<=18 && plateauJeu[x+4][y] == 0){
+								pointX = x+4;
+								pointY = y;
+								trouve = true;
+							}
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isLigneDeQuatreDiagonale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					// Diagonale haut gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y-1)>=0 && (x-2)>=0 && (y-2)>=0 && (x-3)>=0 && (y-3)>=0 && plateauJeu[x-1][y-1] == numJoueur && plateauJeu[x-2][y-2] == numJoueur && plateauJeu[x-3][y-3] == numJoueur){
+							if((x-4)>=0 && (y-4)>=0 && plateauJeu[x-4][y-4] == 0){
+								pointX = x-4;
+								pointY = y-4;
+								trouve = true;
+							}
+							if((x+1)<=18 && (y+1)<=18 && plateauJeu[x+1][y+1] == 0){
+								pointX = x+1;
+								pointY = y+1;
+								trouve = true;
+							}
+						}
+					}
+					
+					// Diagonale haut droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y+1)<=18 && (x-2)>=0 && (y+2)<=18 && (x-3)>=0 && (y+3)<=18 && plateauJeu[x-1][y+1] == numJoueur && plateauJeu[x-2][y+2] == numJoueur && plateauJeu[x-3][y+3] == numJoueur){
+							if((x-4)>=0 && (y+4)<=18 && plateauJeu[x-4][y+4] == 0){
+								pointX = x-4;
+								pointY = y+4;
+								trouve = true;
+							}
+							if((x+1)>=0 && (y-1)>=0 && plateauJeu[x+1][y-1] == 0){
+								pointX = x+1;
+								pointY = y-1;
+								trouve = true;
+							}
+						}
+					}
+					
+					// Diagonale bas gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y-1)>=0 && (x+2)<=18 && (y-2)>=0 && (x+3)<=18 && (y-3)>=0 && plateauJeu[x+1][y-1] == numJoueur && plateauJeu[x+2][y-2] == numJoueur && plateauJeu[x+3][y-3] == numJoueur){
+							if((x+4)<=18 && (y-4)>=0 && plateauJeu[x+4][y-4] == 0){
+								pointX = x+4;
+								pointY = y-4;
+								trouve = true;
+							}
+							if((x-1)>=0 && (y+1)<=18 && plateauJeu[x-1][y+1] == 0){
+								pointX = x-1;
+								pointY = y+1;
+								trouve = true;
+							}
+						}
+					}
+					
+					// Diagonale bas droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y+1)<=18 && (x+2)<=18 && (y+2)<=18 && (x+3)<=18 && (y+3)<=18 && plateauJeu[x+1][y+1] == numJoueur && plateauJeu[x+2][y+2] == numJoueur && plateauJeu[x+3][y+3] == numJoueur){
+							if((x-1)>=0 && (y-1)>=0 && plateauJeu[x-1][y-1] == 0){
+								pointX = x-1;
+								pointY = y-1;
+								trouve = true;
+							}
+							if((x+4)<=18 && (y+4)<=18 && plateauJeu[x+4][y+4] == 0){
+								pointX = x+4;
+								pointY = y+4;
+								trouve = true;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// ---------------------- 2 pions + espace + pion ----------------------------
+$scope.isDeuxPionsEspacePionHorizontal = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++) {
+		if(!trouve){
+			for (var y = 0; y <= 18; y++)
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers la droite
+						if((y+1)<=18 && (y+2)<=18 && (y+3)<=18 && plateauJeu[x][y+1] == numJoueur && plateauJeu[x][y+2] == 0 && plateauJeu[x][y+3] == numJoueur){
+							pointX = x;
+							pointY = y+2;
+							trouve = true;
+						}
+						
+						// Scan vers la gauche
+						if((y-1)>=0 && (y-2)>=0 && (y-3)>=0 && plateauJeu[x][y-1] == numJoueur && plateauJeu[x][y-2] == 0 && plateauJeu[x][y-3] == numJoueur){
+							pointX = x;
+							pointY = y-2;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isDeuxPionsEspacePionVertical = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers le haut
+						if((x-1)>=0 && (x-2)>=0 && (x-3)>=0 && plateauJeu[x-1][y] == numJoueur && plateauJeu[x-2][y] == 0 && plateauJeu[x-3][y] == numJoueur ){
+							pointX = x-2;
+							pointY = y;
+							trouve = true;
+						}
+						//Scan vers le bas
+						if((x+1)<=18 && (x+2)<=18 && (x+3)<=18 && plateauJeu[x+1][y] == numJoueur && plateauJeu[x+2][y] == 0 && plateauJeu[x+3][y] == numJoueur){
+							pointX = x+2;
+							pointY = y;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isDeuxPionsEspacePionDiagonal = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					// Diagonale haut gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y-1)>=0 && (x-2)>=0 && (y-2)>=0 && (x-3)>=0 && (y-3)>=0 && plateauJeu[x-1][y-1] == numJoueur && plateauJeu[x-2][y-2] == 0 && plateauJeu[x-3][y-3] == numJoueur){
+							pointX = x-2;
+							pointY = y-2;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale haut droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y+1)<=18 && (x-2)>=0 && (y+2)<=18 && (x-3)>=0 && (y+3)<=18 && plateauJeu[x-1][y+1] == numJoueur && plateauJeu[x-2][y+2] == 0 && plateauJeu[x-3][y+3] == numJoueur){
+							pointX = x-2;
+							pointY = y+2;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y-1)>=0 && (x+2)<=18 && (y-2)>=0 && (x+3)<=18 && (y-3)>=0 && plateauJeu[x+1][y-1] == numJoueur && plateauJeu[x+2][y-2] == 0 && plateauJeu[x+3][y-3] == numJoueur){
+							pointX = x+2;
+							pointY = y-2;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y+1)<=18 && (x+2)<=18 && (y+2)<=18 && (x+3)<=18 && (y+3)<=18 && plateauJeu[x+1][y+1] == numJoueur && plateauJeu[x+2][y+2] == 0 && plateauJeu[x+3][y+3] == numJoueur){
+							pointX = x+2;
+							pointY = y+2;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// ---------------------- 2 pions + espace + 2 pions ----------------------------
+$scope.isDeuxPionsEspaceDeuxPionsHorizontal = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++) {
+		if(!trouve){
+			for (var y = 0; y <= 18; y++)
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers la droite
+						if((y+1)<=18 && (y+2)<=18 && (y+3)<=18 && (y+4)<=18 && plateauJeu[x][y+1] == numJoueur && plateauJeu[x][y+2] == 0 && plateauJeu[x][y+3] == numJoueur && plateauJeu[x][y+4] == numJoueur){
+							pointX = x;
+							pointY = y+2;
+							trouve = true;
+						}
+						
+						// Scan vers la gauche
+						if((y-1)>=0 && (y-2)>=0 && (y-3)>=0 && (y-4)>=0 && plateauJeu[x][y-1] == numJoueur && plateauJeu[x][y-2] == 0 && plateauJeu[x][y-3] == numJoueur && plateauJeu[x][y-4] == numJoueur){
+							pointX = x;
+							pointY = y-2;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isDeuxPionsEspaceDeuxPionsVertical = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers le haut
+						if((x-1)>=0 && (x-2)>=0 && (x-3)>=0 && (x-4)>=0 && plateauJeu[x-1][y] == numJoueur && plateauJeu[x-2][y] == 0 && plateauJeu[x-3][y] == numJoueur && plateauJeu[x-4][y] == numJoueur ){
+							pointX = x-2;
+							pointY = y;
+							trouve = true;
+						}
+						//Scan vers le bas
+						if((x+1)<=18 && (x+2)<=18 && (x+3)<=18 && (x+4)<=18 && plateauJeu[x+1][y] == numJoueur && plateauJeu[x+2][y] == 0 && plateauJeu[x+3][y] == numJoueur && plateauJeu[x+4][y] == numJoueur){
+							pointX = x+2;
+							pointY = y;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isDeuxPionsEspaceDeuxPionsDiagonal = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					// Diagonale haut gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y-1)>=0 && (x-2)>=0 && (y-2)>=0 && (x-3)>=0 && (y-3)>=0 && (x-4)>=0 && (y-4)>=0 && plateauJeu[x-1][y-1] == numJoueur && plateauJeu[x-2][y-2] == 0 && plateauJeu[x-3][y-3] == numJoueur && plateauJeu[x-4][y-4] == numJoueur){
+							pointX = x-2;
+							pointY = y-2;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale haut droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y+1)<=18 && (x-2)>=0 && (y+2)<=18 && (x-3)>=0 && (y+3)<=18 && (x-4)>=0 && (y+4)<=18 && plateauJeu[x-1][y+1] == numJoueur && plateauJeu[x-2][y+2] == 0 && plateauJeu[x-3][y+3] == numJoueur && plateauJeu[x-4][y+4] == numJoueur){
+							pointX = x-2;
+							pointY = y+2;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y-1)>=0 && (x+2)<=18 && (y-2)>=0 && (x+3)<=18 && (y-3)>=0 && (x+4)<=18 && (y-4)>=0 && plateauJeu[x+1][y-1] == numJoueur && plateauJeu[x+2][y-2] == 0 && plateauJeu[x+3][y-3] == numJoueur && plateauJeu[x+4][y-4] == numJoueur){
+							pointX = x-2;
+							pointY = y-2;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y+1)<=18 && (x+2)<=18 && (y+2)<=18 && (x+3)<=18 && (y+3)<=18 && (x+4)<=18 && (y+4)<=18 && plateauJeu[x+1][y+1] == numJoueur && plateauJeu[x+2][y+2] == 0 && plateauJeu[x+3][y+3] == numJoueur && plateauJeu[x+4][y+4] == numJoueur){
+							pointX = x+2;
+							pointY = y+2;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// ---------------------- 3 pions + espace + pion ----------------------------
+$scope.isTroisPionsEspacePionHorizontal = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++) {
+		if(!trouve){
+			for (var y = 0; y <= 18; y++)
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers la droite
+						if((y+1)<=18 && (y+2)<=18 && (y+3)<=18 && (y+4)<=18 && plateauJeu[x][y+1] == numJoueur && plateauJeu[x][y+2] == numJoueur && plateauJeu[x][y+3] == 0 && plateauJeu[x][y+4] == numJoueur){
+							pointX = x;
+							pointY = y+3;
+							trouve = true;
+						}
+						
+						// Scan vers la gauche
+						if((y-1)>=0 && (y-2)>=0 && (y-3)>=0 && (y-4)>=0 && plateauJeu[x][y-1] == numJoueur && plateauJeu[x][y-2] == numJoueur && plateauJeu[x][y-3] == 0 && plateauJeu[x][y-4] == numJoueur){
+							pointX = x;
+							pointY = y-3;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isTroisPionsEspacePionVertical = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers le haut
+						if((x-1)>=0 && (x-2)>=0 && (x-3)>=0 && (x-4)>=0 && plateauJeu[x-1][y] == numJoueur && plateauJeu[x-2][y] == numJoueur && plateauJeu[x-3][y] == 0 && plateauJeu[x-4][y] == numJoueur ){
+							pointX = x-3;
+							pointY = y;
+							trouve = true;
+						}
+						//Scan vers le bas
+						if((x+1)<=18 && (x+2)<=18 && (x+3)<=18 && (x+4)<=18 && plateauJeu[x+1][y] == numJoueur && plateauJeu[x+2][y] == numJoueur && plateauJeu[x+3][y] == 0 && plateauJeu[x+4][y] == numJoueur){
+							pointX = x+3;
+							pointY = y;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isTroisPionsEspacePionDiagonal = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					// Diagonale haut gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y-1)>=0 && (x-2)>=0 && (y-2)>=0 && (x-3)>=0 && (y-3)>=0 && (x-4)>=0 && (y-4)>=0 && plateauJeu[x-1][y-1] == numJoueur && plateauJeu[x-2][y-2] == numJoueur && plateauJeu[x-3][y-3] == 0 && plateauJeu[x-4][y-4] == numJoueur){
+							pointX = x-3;
+							pointY = y-3;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale haut droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y+1)<=18 && (x-2)>=0 && (y+2)<=18 && (x-3)>=0 && (y+3)<=18 && (x-4)>=0 && (y+4)<=18 && plateauJeu[x-1][y+1] == numJoueur && plateauJeu[x-2][y+2] == numJoueur && plateauJeu[x-3][y+3] == 0 && plateauJeu[x-4][y+4] == numJoueur){
+							pointX = x-3;
+							pointY = y-3;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y-1)>=0 && (x+2)<=18 && (y-2)>=0 && (x+3)<=18 && (y-3)>=0 && (x+4)<=18 && (y-4)>=0 && plateauJeu[x+1][y-1] == numJoueur && plateauJeu[x+2][y-2] == numJoueur && plateauJeu[x+3][y-3] == 0 && plateauJeu[x+4][y-4] == numJoueur){
+							pointX = x+3;
+							pointY = y-3;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y+1)<=18 && (x+2)<=18 && (y+2)<=18 && (x+3)<=18 && (y+3)<=18 && (x+4)<=18 && (y+4)<=18 && plateauJeu[x+1][y+1] == numJoueur && plateauJeu[x+2][y+2] == numJoueur && plateauJeu[x+3][y+3] == 0 && plateauJeu[x+4][y+4] == numJoueur){
+							pointX = x+3;
+							pointY = y+3;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// ---------------------- pion + espace ----------------------------
+$scope.isPaireFormableHorizontale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++) {
+		if(!trouve){
+			for (var y = 0; y <= 18; y++)
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers la droite
+						if((y+1)<=18 &&plateauJeu[x][y+1] == numJoueur){
+							pointX = x;
+							pointY = y+1;
+							trouve = true;
+						}
+						
+						// Scan vers la gauche
+						if((y-1)>=0 && plateauJeu[x][y-1] == numJoueur ){
+							pointX = x;
+							pointY = y-1;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isPaireFormableVertical = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers le haut
+						if((x-1)>=0 && plateauJeu[x-1][y] == numJoueur){
+							pointX = x-1;
+							pointY = y;
+							trouve = true;
+						}
+						//Scan vers le bas
+						if((x+1)<=18 && plateauJeu[x+1][y] == numJoueur){
+							pointX = x+1;
+							pointY = y;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isPaireFormableDiagonal = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					// Diagonale haut gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y-1)>=0 && plateauJeu[x-1][y-1] == numJoueur ){
+							pointX = x-1;
+							pointY = y-1;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale haut droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y+1)<=18 && plateauJeu[x-1][y+1] == numJoueur){
+							pointX = x-1;
+							pointY = y-1;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y-1)>=0 && plateauJeu[x+1][y-1] == numJoueur){
+							pointX = x+1;
+							pointY = y-1;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y+1)<=18 && plateauJeu[x+1][y+1] == numJoueur){
+							pointX = x+1;
+							pointY = y+1;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// ---------------------- espace + 2 pion adverses + pions OU pion + 2 pions adverses + espace ----------------------------
+$scope.isPaireMangeableHorizontale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++) {
+		if(!trouve){
+			for (var y = 0; y <= 18; y++)
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers la droite
+						if((y+1)<=18 && (y+2)<=18 && (y+3)<=18 && plateauJeu[x][y+1] != numJoueur && plateauJeu[x][y+1] != 0 && plateauJeu[x][y+2] != numJoueur && plateauJeu[x][y+2] != 0 && plateauJeu[x][y+3] == 0){
+							pointX = x;
+							pointY = y+3;
+							trouve = true;
+						}
+						
+						// Scan vers la gauche
+						if((y-1)>=0 && (y-2)>=0 && (y-3)>=0 && plateauJeu[x][y-1] != numJoueur && plateauJeu[x][y-1] != 0 && plateauJeu[x][y-2] != numJoueur && plateauJeu[x][y-2] != 0 && plateauJeu[x][y-3] == 0){
+							pointX = x;
+							pointY = y-3;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isPaireMangeableVerticale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					if (plateauJeu[x][y] == numJoueur){
+						// Scan vers la bas
+						if((x+1)<=18 && (x+2)<=18 && (x+3)<=18 && plateauJeu[x+1][y] != numJoueur && plateauJeu[x+1][y] != 0 && plateauJeu[x+2][y] != numJoueur && plateauJeu[x+2][y] != 0 && plateauJeu[x+3][y] == 0){
+							pointX = x;
+							pointY = y+3;
+							trouve = true;
+						}
+						
+						// Scan vers la bas
+						if((x-1)>=0 && (x-2)>=0 && (x+3)>=0 && plateauJeu[x-1][y] != numJoueur && plateauJeu[x-1][y] != 0 && plateauJeu[x-2][y] != numJoueur && plateauJeu[x-2][y] != 0 && plateauJeu[x-3][y] == 0){
+							pointX = x-3;
+							pointY = y;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}			
+	}
+}
+
+$scope.isPaireMangeableDiagonale = function(numJoueur){
+	trouve = false;
+	pointX = null;
+	pointY = null;
+	for (var x = 0; x <= 18; x++){
+		if(!trouve){
+			for (var y = 0; y <= 18; y++) {
+				if(!trouve){
+					// Diagonale haut gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y-1)>=0 && plateauJeu[x-1][y-1] != numJoueur && plateauJeu[x-1][y-1] != 0 && plateauJeu[x-2][y-2] != numJoueur && plateauJeu[x-2][y-2] != 0 && plateauJeu[x-3][y-3] == 0){
+							pointX = x-3;
+							pointY = y-3;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale haut droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x-1)>=0 && (y+1)<=18 && plateauJeu[x-1][y+1] != numJoueur && plateauJeu[x-1][y+1] != 0 && plateauJeu[x-2][y+2] != numJoueur && plateauJeu[x-2][y+2] != 0 && plateauJeu[x-3][y+3] == 0){
+							pointX = x-3;
+							pointY = y-3;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas gauche
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y-1)>=0 && (x+2)<=18 && (y-2)>=0 && (x+3)<=18 && (y-3)>=0 && plateauJeu[x+1][y-1] != numJoueur && plateauJeu[x+1][y-1] != 0 && plateauJeu[x+2][y-2] != numJoueur && plateauJeu[x+2][y-2] != 0  && plateauJeu[x+3][y-3] == 0){
+							pointX = x+3;
+							pointY = y-3;
+							trouve = true;
+						}
+					}
+					
+					// Diagonale bas droite
+					if (plateauJeu[x][y] == numJoueur){
+						if((x+1)<=18 && (y+1)<=18 && (x+2)<=18 && (y+2)<=18 && (x+3)<=18 && (y+3)<=18 && plateauJeu[x+1][y+1] != numJoueur && plateauJeu[x+1][y+1] != 0 && plateauJeu[x+2][y+2] != numJoueur && plateauJeu[x+2][y+2] != 0 && plateauJeu[x+3][y+3] == 0){
+							pointX = x+3;
+							pointY = y+3;
+							trouve = true;
+						}
+					}
+				}
+			}
+		}
+	}
+}
