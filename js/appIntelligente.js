@@ -46,7 +46,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 	$scope.joinGame = function(gameMode) {
 		if ($scope.nomJoueur.length != 8 || isNaN($scope.nomJoueur.substring(0,4)) || $scope.nomJoueur.substring(4, 8).match(/\d+/g) != null) {
 			$scope.errorMessage.error = true;
-			$scope.errorMessage.message = "Mauvais nom d'équipe : 4 chiffres - 4 lettres";
+			$scope.errorMessage.message = "Le nom d'équipe doit être sous la forme : 4 chiffres - 4 lettres";
 			$timeout(function() {
 				$scope.errorMessage = {error: false, message: null};
 			}, 3000);
@@ -95,7 +95,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		var tableau = data.tableau;
 		var dernierCoupX = data.dernierCoupX;
 		var dernierCoupY = data.dernierCoupY;
-		var numJoueurAdverse = $scope.numJoueur == 1 ? 0 : 1;
+		var numJoueurAdverse = $scope.numJoueur == 1 ? 2 : 1;
 		var choixX;
 		var choixY;
 		var retour = {'posX': null, 'posY': null};
@@ -115,60 +115,70 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 
 			retour = $scope.isPaireFormable(tableau, $scope.numJoueur);
 			if (retour.posX != null && retour.posY != null) {
+				console.log("Paire formable");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
 				
 			retour = $scope.isPaireMangeable(tableau, $scope.numJoueur);
 			if (retour.posX != null && retour.posY != null){
+				console.log("Paire mangeable à nous");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
 
 			retour = $scope.isPaireMangeable(tableau, numJoueurAdverse);
 			if (retour.posX != null && retour.posY != null){
+				console.log("Paire formable de l'adversaire");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
 
 			retour = $scope.isLigneDeDeux(tableau, $scope.numJoueur);
 			if (retour.posX != null && retour.posY != null){
+				console.log("Ligne de deux");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
 
 			retour = $scope.isLigneDeTrois(tableau, numJoueurAdverse);
 			if (retour.posX != null && retour.posY != null){
+				console.log("Ligne de Trois adverse");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
 
 			retour = $scope.isLigneDeTrois(tableau, $scope.numJoueur);
 			if (retour.posX != null && retour.posY != null){
+				console.log("Ligne de deux");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
 
 			retour = $scope.isDeuxPionsEspacePion(tableau, $scope.numJoueur);
 			if (retour.posX != null && retour.posY != null){
+				console.log("DeuxPionsEspacePion");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
 
 			retour = $scope.isTroisPionsEspacePion(tableau, $scope.numJoueur);
 			if (retour.posX != null && retour.posY != null){
+				console.log("isTroisPionsEspacePion");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
 
 			retour = $scope.isDeuxPionsEspaceDeuxPions(tableau, $scope.numJoueur);
 			if (retour.posX != null && retour.posY != null){
+				console.log("isDeuxPionsEspaceDeuxPions");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
 
 			retour = $scope.isLigneDeQuatre(tableau, $scope.numJoueur);
 			if (retour.posX != null && retour.posY != null){
+				console.log("isLigneDeQuatre");
 				choixX = retour.posX; 
 				choixY = retour.posY;
 			}
@@ -221,16 +231,19 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		
 		retourSecond = $scope.isLigneDeTroisDiagonale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isLigneDeTroisDiagonale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isLigneDeTroisVerticale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isLigneDeTroisVerticale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isLigneDeTroisHorizontale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isLigneDeTroisHorizontale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
@@ -243,40 +256,47 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		
 		retourSecond = $scope.isLigneDeQuatreDiagonale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isLigneDeQuatreDiagonale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isLigneDeQuatreVerticale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isLigneDeQuatreVerticale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isLigneDeQuatreHorizontale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isLigneDeQuatreHorizontale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		
 		return retourFinal;
 	};
+
 	$scope.isPaireFormable = function(tableau, numJoueur) {
 		var retourSecond = {'posX': null, 'posY': null};
 		var retourFinal = {'posX': null, 'posY': null};
 		
 		retourSecond = $scope.isPaireFormableDiagonal(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isPaireFormableDiagonal");
 			retourFinal.posX = retourSecond.posX;
 			retourFinal.posY = retourSecond.posY;
 		}
 
 		retourSecond = $scope.isPaireFormableHorizontale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isPaireFormableHorizontale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 
-		retourSecond = $scope.isPaireFormableVertical(tableau, numJoueur);
+		retourSecond = $scope.isPaireFormableVerticale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isPaireFormableVerticale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
@@ -289,16 +309,19 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		
 		retourSecond = $scope.isPaireMangeableDiagonale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isPaireMangeableDiagonale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isPaireMangeableHorizontale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isPaireMangeableHorizontale");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isPaireMangeableVerticale(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isPaireMangeableVerticale");
 			retourFinal.posX = retourSecond.posX;
 			retourFinal.posY = retourSecond.posY;
 		}
@@ -311,16 +334,19 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		
 		retourSecond = $scope.isDeuxPionsEspacePionDiagonal(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isDeuxPionsEspacePionDiagonal");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isDeuxPionsEspacePionVertical(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isDeuxPionsEspacePionVertical");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isDeuxPionsEspacePionHorizontal(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isDeuxPionsEspacePionHorizontal");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
@@ -333,16 +359,19 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		
 		retourSecond = $scope.isTroisPionsEspacePionDiagonal(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isTroisPionsEspacePionDiagonal");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isTroisPionsEspacePionVertical(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isTroisPionsEspacePionVertical");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isTroisPionsEspacePionHorizontal(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isTroisPionsEspacePionHorizontal");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
@@ -355,16 +384,19 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		
 		retourSecond = $scope.isDeuxPionsEspaceDeuxPionsVertical(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isDeuxPionsEspaceDeuxPionsVertical");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isDeuxPionsEspaceDeuxPionsHorizontal(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isDeuxPionsEspaceDeuxPionsHorizontal");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
 		retourSecond = $scope.isDeuxPionsEspaceDeuxPionsDiagonal(tableau, numJoueur);
 		if (retourSecond.posX != null && retourSecond.posY != null){
+			console.log("isDeuxPionsEspaceDeuxPionsDiagonal");
 			retourFinal.posX = retourSecond.posX; 
 			retourFinal.posY = retourSecond.posY;
 		}
@@ -449,7 +481,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isLigneDeDeuxVerticale = function(plateauJeu, numJoueur){
@@ -482,7 +514,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 									trouve = true;
 								}
 								if((x+2)<=18 && plateauJeu[x+2][y] == 0){
-									pointX = x+4;
+									pointX = x+2;
 									pointY = y;
 									trouve = true;
 								}
@@ -492,7 +524,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isLigneDeDeuxDiagonale = function(plateauJeu, numJoueur){
@@ -571,7 +603,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isLigneDeTroisHorizontale = function(plateauJeu, numJoueur){
@@ -617,7 +649,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isLigneDeTroisVerticale = function(plateauJeu, numJoueur){
@@ -661,7 +693,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isLigneDeTroisDiagonale = function(plateauJeu, numJoueur){
@@ -739,7 +771,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isLigneDeQuatreHorizontale = function(plateauJeu, numJoueur){
@@ -783,7 +815,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isLigneDeQuatreVerticale = function(plateauJeu, numJoueur){
@@ -826,7 +858,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isLigneDeQuatreDiagonale = function(plateauJeu, numJoueur){
@@ -904,7 +936,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isDeuxPionsEspacePionHorizontal = function(plateauJeu, numJoueur){
@@ -934,7 +966,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isDeuxPionsEspacePionVertical = function(plateauJeu, numJoueur){
@@ -963,7 +995,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isDeuxPionsEspacePionDiagonal = function(plateauJeu, numJoueur){
@@ -1013,7 +1045,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isDeuxPionsEspaceDeuxPionsHorizontal = function(plateauJeu, numJoueur){
@@ -1043,7 +1075,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isDeuxPionsEspaceDeuxPionsVertical = function(plateauJeu, numJoueur){
@@ -1072,7 +1104,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isDeuxPionsEspaceDeuxPionsDiagonal = function(plateauJeu, numJoueur){
@@ -1122,7 +1154,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isTroisPionsEspacePionHorizontal = function(plateauJeu, numJoueur){
@@ -1152,7 +1184,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isTroisPionsEspacePionVertical = function(plateauJeu, numJoueur){
@@ -1181,7 +1213,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isTroisPionsEspacePionDiagonal = function(plateauJeu, numJoueur){
@@ -1231,7 +1263,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isPaireFormableHorizontale = function(plateauJeu, numJoueur){
@@ -1261,10 +1293,10 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
-	$scope.isPaireFormableVertical = function(plateauJeu, numJoueur){
+	$scope.isPaireFormableVerticale = function(plateauJeu, numJoueur){
 		trouve = false;
 		pointX = null;
 		pointY = null;
@@ -1275,12 +1307,14 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 						if (plateauJeu[x][y] == numJoueur){
 							// Scan vers le haut
 							if((x-1)>=0 && plateauJeu[x-1][y] == 0){
+								console.log("paire formable trouvé si placé en haut");
 								pointX = x-1;
 								pointY = y;
 								trouve = true;
 							}
 							//Scan vers le bas
 							if((x+1)<=18 && plateauJeu[x+1][y] == 0){
+								console.log("paire formable trouvé si placé en bas");
 								pointX = x+1;
 								pointY = y;
 								trouve = true;
@@ -1290,7 +1324,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isPaireFormableDiagonal = function(plateauJeu, numJoueur){
@@ -1340,7 +1374,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 	
 	$scope.isPaireMangeableHorizontale = function(plateauJeu, numJoueur){
@@ -1370,7 +1404,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isPaireMangeableVerticale = function(plateauJeu, numJoueur){
@@ -1400,7 +1434,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}			
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 
 	$scope.isPaireMangeableDiagonale = function(plateauJeu, numJoueur){
@@ -1450,6 +1484,6 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				}
 			}
 		}
-		return {'posX': null, 'posY': null};
+		return {'posX': pointX, 'posY': pointY};
 	};
 }]);
