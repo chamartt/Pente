@@ -59,7 +59,7 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 				$scope.idJoueur = data.idJoueur;
 				$scope.gameMode = gameMode;
 				$scope.numJoueur = data.numJoueur;
-				$scope.interval = $interval($scope.getTurnInfo,500)
+				$scope.interval = $interval($scope.getTurnInfo,500);
 				
 			}, function error(response) {
 				if (response.data == undefined || response.data == null) {
@@ -105,10 +105,18 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		else if ($scope.nbCoupJoue == 2) {
 			choixX = Math.floor(Math.random() * 6) + 12;
 			choixY = Math.floor(Math.random() * 6) + 12;
+			while (tableau[choixX][choixY] != 0) {
+				choixX = Math.floor(Math.random() * 6) + 12;
+				choixY = Math.floor(Math.random() * 6) + 12;
+			}
 		}
 		else {
 			choixX = Math.floor(Math.random() * 18) + 0;
 			choixY = Math.floor(Math.random() * 18) + 0;
+			while (tableau[choixX][choixY] != 0) {
+				choixX = Math.floor(Math.random() * 18) + 0;
+				choixY = Math.floor(Math.random() * 18) + 0;
+			}
 		}
 		// Decomenter cette ligne apres avoir joué le coup
 		if (data.finPartie) {
