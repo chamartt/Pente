@@ -494,6 +494,23 @@ router.get('/turn/:idJoueur', function(req, res) {
 		numTour: nombreDeTour,
 		code: 200
 	});
+	if (finDePartie) {
+		setTimeout(function() {
+			playerTab = [];
+			plateauJeu = [];
+			nombreDeTour = 0;
+			nbTenaillesJ1 = 0;
+			nbTenaillesJ2 = 0;
+			numJoueur = 1;
+			dernierCoupX;
+			dernierCoupY;
+			tourJoueur;
+			finDePartie = false;
+			mortSubite = false;
+			timeout = null;
+			messageFinPartie = null;
+		}, 1000);
+	}
 });
 
 /* CORS REQUEST */
