@@ -86,6 +86,7 @@
         font-family: 'Spirax', cursive;
         font-size: 30pt;
         text-align: center;
+        padding-bottom: 13px;
     }
     #turn-time {
         width: 100%;
@@ -165,6 +166,7 @@
     }
     .details-section {
         font-size: 14pt;
+        font-weight: bold;
     }
     .player-section:first-of-type {
         margin-bottom: 30px;
@@ -173,6 +175,7 @@
         margin-bottom: 10px;
         background-color: lightgrey;
         box-shadow: 3px 3px 6px 0px;
+        border: none;
     }
     .legend-details {
         border: solid grey 1px;
@@ -191,6 +194,7 @@
     }
     .values {
         display: inline-block;
+        font-weight: bold;
     }
 	.endgame {
 		color: red !important;
