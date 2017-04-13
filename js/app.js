@@ -125,18 +125,20 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 			$interval.cancel($scope.interval);
 		}
 		else {
-			$http.get($scope.apiURL + "/play/" + choixX + "/" + choixY + "/" + $scope.idJoueur)
-			.then(function success(response) {
-				$scope.isPlaying = false;
-			}, function error(response) {
-				$scope.errorInPlay.active = true;
-				$scope.errorInPlay.message = response.data.error;
-				$scope.isPlaying = true;
-				$scope.myTurnToPlay($scope.tempData);
-				$timeout(function() {
-					$scope.errorInPlay = {active: false, message: null};
-				}, 2000);
-			});
+			$timeout(function() {
+				$http.get($scope.apiURL + "/play/" + choixX + "/" + choixY + "/" + $scope.idJoueur)
+				.then(function success(response) {
+					$scope.isPlaying = false;
+				}, function error(response) {
+					$scope.errorInPlay.active = true;
+					$scope.errorInPlay.message = response.data.error;
+					$scope.isPlaying = true;
+					$scope.myTurnToPlay($scope.tempData);
+					$timeout(function() {
+						$scope.errorInPlay = {active: false, message: null};
+					}, 2000);
+				});
+			}, 2000);
 		}
 	};
 	
