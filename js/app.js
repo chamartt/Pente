@@ -33,6 +33,8 @@ app.controller("penteCtrl", ['$scope', '$http', '$interval', '$timeout', functio
 		  var distance = countDownDate - now;
 		  
 		  if (distance < 0) {
+			$scope.minuteGlobal = "00";
+			$scope.secondGlobal = "00";
 			clearInterval(x);
 		  }
 		  
