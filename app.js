@@ -200,7 +200,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 	}
 	else {
 		if (x + 3 <= 18) {
-			if (plateauJeu[x + 1][y] == 2 && plateauJeu[x + 2][y] == 2 && plateauJeu[x + 3][y] == 1) {
+			if (plateauJeu[x + 1][y] == 1 && plateauJeu[x + 2][y] == 2 && plateauJeu[x + 3][y] == 2) {
 				// tenaille bas du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
@@ -212,7 +212,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 			}
 		}
 		if (x + 3 <= 18 && y + 3 <= 18) {
-			if (plateauJeu[x + 1][y + 1] == 2 && plateauJeu[x + 2][y + 2] == 2 && plateauJeu[x + 3][y + 3] == 1) {
+			if (plateauJeu[x + 1][y + 1] == 1 && plateauJeu[x + 2][y + 2] == 1 && plateauJeu[x + 3][y + 3] == 2) {
 				// tenaille bas diagonale droite du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
@@ -224,7 +224,7 @@ function gestionTenaillesBas(numeroJoueur, x, y) {
 			}
 		}
 		if (x + 3 <= 18 && y - 3 >= 0) {
-			if (plateauJeu[x + 1][y - 1] == 2 && plateauJeu[x + 2][y - 2] == 2 && plateauJeu[x + 3][y - 3] == 1) {
+			if (plateauJeu[x + 1][y - 1] == 1 && plateauJeu[x + 2][y - 2] == 1 && plateauJeu[x + 3][y - 3] == 2) {
 				// tenaille bas diagonale gauche du pion posé
 				nbTenaillesJ2++;
 				if (mortSubite) {
